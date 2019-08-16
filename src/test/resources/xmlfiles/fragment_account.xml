@@ -1,0 +1,595 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:id="@+id/scroll_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true">
+
+            <!--Dummy view to stop focus-->
+            <View
+                android:id="@+id/view_dummy_focus"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                app:layout_constraintStart_toStartOf="@+id/somethign"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <requestFocus />
+            </View>
+
+            <ImageView
+                android:id="@+id/image_header"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:src="@drawable/img_my_account_header"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/grey_light"
+                app:layout_constraintBottom_toBottomOf="@+id/divider_2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/divider_1" />
+
+            <View
+                android:id="@+id/divider_1"
+                style="@style/App.Widget.Divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/image_header" />
+
+            <TextView
+                android:id="@+id/text_review"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_start_2"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="@dimen/keyline_end_2"
+                android:gravity="center"
+                android:text="@string/leave_a_review"
+                android:textColor="@color/blue_dark"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider_1" />
+
+            <Button
+                android:id="@+id/button_review_negative"
+                style="@style/ButtonStyle.Secondary.ReviewNegative"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_start_1"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:text="@string/action_dont_ask"
+                app:layout_constraintEnd_toStartOf="@+id/button_review_positive"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_review" />
+
+            <Button
+                android:id="@+id/button_review_positive"
+                style="@style/ButtonStyle.Secondary.ReviewPositive"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="@dimen/keyline_end_1"
+                android:layout_weight="1"
+                android:text="@string/action_review_yes"
+                app:layout_constraintBottom_toBottomOf="@+id/button_review_negative"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/button_review_negative"
+                app:layout_constraintTop_toTopOf="@+id/button_review_negative" />
+
+            <View
+                android:id="@+id/divider_2"
+                style="@style/App.Widget.Divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button_review_negative" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group_review"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="gone"
+                app:constraint_referenced_ids="divider_1,text_review,button_review_negative,button_review_positive,divider_2" />
+
+            <TextView
+                android:id="@+id/text_title_saved_details"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_start_1"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="center_vertical"
+                android:text="@string/label_saved_details"
+                android:textColor="@color/grey_dark"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toStartOf="@+id/progress_update"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider_2" />
+
+            <TextView
+                android:id="@+id/text_info_saved_details"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_start_1"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="@dimen/keyline_end_1"
+                android:text="@string/saved_details_justification"
+                android:textColor="@color/grey_mid_dark"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_title_saved_details" />
+
+            <ProgressBar
+                android:id="@+id/progress_update"
+                style="@style/App.Widget.ProgressBar.Inline"
+                android:layout_width="20dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/keyline_start_1"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="@dimen/keyline_end_1"
+                android:layout_marginBottom="2dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/text_title_saved_details"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/text_title_saved_details"
+                tools:visibility="visible" />
+
+            <View
+                android:id="@+id/divider_3"
+                style="@style/App.Widget.Divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_info_saved_details" />
+
+            <Button
+                android:id="@+id/button_names"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:drawableStart="@drawable/ic_passenger_24dp"
+                android:drawablePadding="16dp"
+                android:fontFamily="sans-serif"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/keyline_start_1"
+                android:paddingTop="16dp"
+                android:paddingEnd="56dp"
+                android:paddingBottom="16dp"
+                android:text="@string/label_personal"
+                android:textAllCaps="false"
+                android:textColor="@color/grey_dark"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider_3" />
+
+            <ImageView
+                android:id="@+id/image_chevron_names"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/keyline_end_1"
+                android:contentDescription="@string/action_expand"
+                android:src="@drawable/ic_expand_24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/button_names"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/button_names" />
+
+            <com.trainsplit.trainsplit.widgets.TextInputWidget
+                android:id="@+id/text_input_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_start_1"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                android:inputType="textPersonName|textNoSuggestions|textCapWords"
+                android:nextFocusDown="@+id/text_input_initial"
+                app:hint="@string/hint_title"
+                app:label="@string/label_title"
+                app:layout_constraintEnd_toStartOf="@+id/text_input_initial"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button_names"
+                app:required="false" />
+
+            <com.trainsplit.trainsplit.widgets.TextInputWidget
+                android:id="@+id/text_input_initial"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="@dimen/keyline_end_1"
+                android:inputType="textPersonName|textNoSuggestions|textCapWords"
+                android:maxLength="4"
+                android:nextFocusDown="@+id/text_input_last"
+                app:hint="@string/hint_please_enter"
+                app:label="@string/label_initial"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/text_input_title"
+                app:layout_constraintTop_toTopOf="@+id/text_input_title"
+                app:required="false" />
+
+            <com.trainsplit.trainsplit.widgets.TextInputWidget
+                android:id="@+id/text_input_last"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_start_1"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="@dimen/keyline_end_1"
+                android:inputType="textPersonName|textNoSuggestions|textCapWords"
+                android:nextFocusDown="@+id/text_input_email"
+                android:paddingBottom="16dp"
+                app:hint="@string/hint_please_enter"
+                app:label="@string/label_last"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_input_title"
+                app:required="false" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group_names"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="gone"
+                app:constraint_referenced_ids="text_input_title,text_input_initial,text_input_last" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier_names"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="button_names,text_input_last" />
+
+            <View
+                android:id="@+id/divider_4"
+                style="@style/App.Widget.Divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/barrier_names" />
+
+            <Button
+                android:id="@+id/button_contact"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:drawableStart="@drawable/ic_contact_24dp"
+                android:drawablePadding="16dp"
+                android:fontFamily="sans-serif"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/keyline_start_1"
+                android:paddingTop="16dp"
+                android:paddingEnd="56dp"
+                android:paddingBottom="16dp"
+                android:text="@string/label_contact"
+                android:textAllCaps="false"
+                android:textColor="@color/grey_dark"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider_4" />
+
+            <ImageView
+                android:id="@+id/image_chevron_contact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/keyline_end_1"
+                android:contentDescription="@string/action_expand"
+                android:src="@drawable/ic_expand_24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/button_contact"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/button_contact" />
+
+            <com.trainsplit.trainsplit.widgets.TextInputWidget
+                android:id="@+id/text_input_email"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_start_1"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="@dimen/keyline_end_1"
+                android:inputType="textEmailAddress"
+                android:nextFocusDown="@+id/text_input_phone"
+                app:hint="@string/hint_please_enter"
+                app:info="@string/email_justification"
+                app:label="@string/label_email"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button_contact" />
+
+            <com.trainsplit.trainsplit.widgets.TextInputWidget
+                android:id="@+id/text_input_phone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_start_1"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="@dimen/keyline_end_1"
+                android:inputType="phone"
+                android:nextFocusDown="@+id/edit_postcode"
+                android:paddingBottom="16dp"
+                app:hint="@string/hint_please_enter"
+                app:info="@string/phone_justification"
+                app:label="@string/label_phone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_input_email" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group_contact"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="gone"
+                app:constraint_referenced_ids="text_input_email,text_input_phone" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier_contact"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="button_contact,text_input_phone" />
+
+            <View
+                android:id="@+id/divider_5"
+                style="@style/App.Widget.Divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/barrier_contact" />
+
+            <Button
+                android:id="@+id/button_address"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:drawableStart="@drawable/ic_address_24dp"
+                android:drawablePadding="16dp"
+                android:fontFamily="sans-serif"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/keyline_start_1"
+                android:paddingTop="16dp"
+                android:paddingEnd="56dp"
+                android:paddingBottom="16dp"
+                android:text="@string/label_address_information"
+                android:textAllCaps="false"
+                android:textColor="@color/grey_dark"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider_5" />
+
+            <ImageView
+                android:id="@+id/image_chevron_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/keyline_end_1"
+                android:contentDescription="@string/action_expand"
+                android:src="@drawable/ic_expand_24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/button_address"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/button_address" />
+
+            <com.trainsplit.trainsplit.widgets.TextInputWidget
+                android:id="@+id/text_input_address1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_start_1"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="@dimen/keyline_end_1"
+                android:inputType="textNoSuggestions|textCapWords"
+                android:visibility="gone"
+                app:hint="@string/hint_address1"
+                app:label="@string/label_address1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button_address"
+                app:required="false"
+                tools:visibility="visible" />
+
+            <com.trainsplit.trainsplit.widgets.TextInputWidget
+                android:id="@+id/text_input_address2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_start_1"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="@dimen/keyline_end_1"
+                android:inputType="textNoSuggestions|textCapWords"
+                android:visibility="gone"
+                app:hint="@string/hint_address2"
+                app:label="@string/label_address2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_input_address1"
+                app:required="false"
+                tools:visibility="visible" />
+
+            <com.trainsplit.trainsplit.widgets.TextInputWidget
+                android:id="@+id/text_input_address3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_start_1"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="@dimen/keyline_end_1"
+                android:inputType="textNoSuggestions|textCapWords"
+                android:visibility="gone"
+                app:hint="@string/hint_address3"
+                app:label="@string/label_address3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_input_address2"
+                app:required="false"
+                tools:visibility="visible" />
+
+            <com.trainsplit.trainsplit.widgets.TextInputWidget
+                android:id="@+id/text_input_address4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_start_1"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="@dimen/keyline_end_1"
+                android:inputType="textNoSuggestions|textCapWords"
+                android:visibility="gone"
+                app:hint="@string/hint_address4"
+                app:label="@string/label_address4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_input_address3"
+                app:required="false"
+                tools:visibility="visible" />
+
+            <com.trainsplit.trainsplit.widgets.TextInputWidget
+                android:id="@+id/text_input_address5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_start_1"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="@dimen/keyline_end_1"
+                android:inputType="textNoSuggestions|textCapWords"
+                android:visibility="gone"
+                app:hint="@string/hint_address5"
+                app:label="@string/label_address5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_input_address4"
+                app:required="false"
+                tools:visibility="visible" />
+
+            <com.trainsplit.trainsplit.widgets.TextInputWidget
+                android:id="@+id/text_input_postcode"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_start_1"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="@dimen/keyline_end_1"
+                android:inputType="textCapCharacters|textNoSuggestions"
+                android:paddingBottom="16dp"
+                app:hint="@string/hint_postcode"
+                app:label="@string/label_postcode"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_input_address5"
+                app:required="false" />
+
+            <Button
+                android:id="@+id/button_postcode_lookup"
+                style="@style/ButtonStyle.Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/action_lookup"
+                app:layout_constraintBottom_toBottomOf="@+id/text_input_postcode"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/text_input_postcode" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group_address_fields"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="gone"
+                app:constraint_referenced_ids="text_input_address1,text_input_address2,text_input_address3,text_input_address4,text_input_address5" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group_address"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="gone"
+                app:constraint_referenced_ids="text_input_postcode,button_postcode_lookup" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier_address"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="button_address,text_input_postcode" />
+
+            <View
+                android:id="@+id/divider_6"
+                style="@style/App.Widget.Divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/barrier_address" />
+
+            <Button
+                android:id="@+id/button_update"
+                style="@style/ButtonStyle.Primary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_start_2"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="@dimen/keyline_end_2"
+                android:enabled="false"
+                android:text="@string/action_update_details"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider_6" />
+
+            <Button
+                android:id="@+id/button_signout"
+                style="@style/ButtonStyle.Text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_start_2"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="@dimen/keyline_end_2"
+                android:layout_marginBottom="24dp"
+                android:text="@string/action_signout"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button_update" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/colorSurface"
+        android:visibility="gone"
+        tools:visibility="gone">
+
+        <include
+            android:id="@+id/layout_spinner"
+            layout="@layout/view_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <FrameLayout
+        android:id="@+id/frame_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</FrameLayout>

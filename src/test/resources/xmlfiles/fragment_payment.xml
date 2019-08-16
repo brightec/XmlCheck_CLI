@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        style="@style/App.Widget.AppBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            style="@style/App.Widget.Toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="@string/title_payment_personal" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true"
+            android:background="@color/blue_light">
+
+            <Button
+                android:id="@+id/button_expand"
+                style="@style/ButtonStyle.Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/action_details"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/text_summary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/blue_dark"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toStartOf="@+id/button_expand"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="BTN > EDB" />
+
+            <TextView
+                android:id="@+id/text_summary_line1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:drawablePadding="8dp"
+                android:textColor="@color/grey_dark"
+                android:textSize="14sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toStartOf="@+id/button_expand"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_summary"
+                tools:drawableStart="@drawable/ic_outward_arrow_grey_dark_18dp"
+                tools:text="11:48 - 15:48   Sun 26 Nov" />
+
+            <TextView
+                android:id="@+id/text_summary_line2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:drawableStart="@drawable/ic_return_arrow_grey_dark_18dp"
+                android:drawablePadding="8dp"
+                android:textColor="@color/grey_dark"
+                android:textSize="14sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toStartOf="@+id/button_expand"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_summary_line1"
+                tools:text="23:48 - 01:48   Mon 27 Nov" />
+
+            <TextView
+                android:id="@+id/text_summary_line3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/grey_dark"
+                android:textSize="14sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toStartOf="@+id/button_expand"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_summary_line2"
+                tools:text="1 passenger" />
+
+            <TextView
+                android:id="@+id/text_summary_line4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/grey_dark"
+                android:textSize="14sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toStartOf="@+id/button_expand"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_summary_line3"
+                tools:text="£63.36" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier_bottom"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="text_summary,text_summary_line4" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/barrier_bottom" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:id="@+id/scroll_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true">
+
+            <!--Dummy view to stop focus-->
+            <View
+                android:id="@+id/view_dummy_focus"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <requestFocus />
+            </View>
+
+            <TextView
+                android:id="@+id/text_title_delivery"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_start_1"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="@dimen/keyline_end_1"
+                android:drawableStart="@drawable/ic_ticket_black_24dp"
+                android:drawablePadding="16dp"
+                android:drawableTint="@color/grey_dark"
+                android:text="@string/label_delivery"
+                android:textColor="@color/grey_dark"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:targetApi="m" />
+
+            <TextView
+                android:id="@+id/text_delivery_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_start_1"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="@dimen/keyline_end_1"
+                android:textColor="@color/magenta_normal"
+                android:textSize="12sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_title_delivery"
+                tools:text="Info info info info info"
+                tools:visibility="gone" />
+
+            <TextView
+                android:id="@+id/text_delivery"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_start_1"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="@dimen/keyline_end_1"
+                android:textColor="@color/grey_dark"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_delivery_error"
+                tools:text="All journeys will be fulfilled by Ticket on Departure (TOD)" />
+
+            <TextView
+                android:id="@+id/text_label_alternative_stations"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_start_1"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="@dimen/keyline_end_1"
+                android:labelFor="@+id/spinner_alternative_stations"
+                android:text="@string/label_alternative_station"
+                android:textColor="@color/blue_dark"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_delivery" />
+
+            <Spinner
+                android:id="@+id/spinner_alternative_stations"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_start_1"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="@dimen/keyline_end_1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_label_alternative_stations" />
+
+            <TextView
+                android:id="@+id/text_info_alternative_stations"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_start_1"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="@dimen/keyline_end_1"
+                android:text="@string/info_alternative_station"
+                android:textColor="@color/grey_mid_dark"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinner_alternative_stations" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group_alternative_station"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="gone"
+                app:constraint_referenced_ids="text_label_alternative_stations,spinner_alternative_stations,text_info_alternative_stations"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/text_opening_times"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_start_1"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="@dimen/keyline_end_1"
+                android:textColor="@color/grey_dark"
+                android:textSize="12sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_info_alternative_stations"
+                tools:text="Monday to Friday: 07:00 - 23:00\nSaturday: 07:00 - 23:00\nSunday: 08:30 - 23:00"
+                tools:visibility="visible" />
+
+            <View
+                android:id="@+id/divider_1"
+                style="@style/App.Widget.Divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_opening_times" />
+
+            <TextView
+                android:id="@+id/text_title_personal_details"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_start_1"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="@dimen/keyline_end_1"
+                android:drawableStart="@drawable/ic_passenger_24dp"
+                android:drawablePadding="16dp"
+                android:text="@string/label_personal_details"
+                android:textColor="@color/grey_dark"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider_1" />
+
+
+            <!--MaxLength 8 since trainsplit api will break if more 20/12/2017-->
+            <com.trainsplit.trainsplit.widgets.TextInputWidget
+                android:id="@+id/text_input_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_start_1"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:inputType="textPersonName|textNoSuggestions|textCapWords"
+                android:maxLength="4"
+                android:nextFocusDown="@+id/text_input_initial"
+                app:hint="@string/hint_title"
+                app:label="@string/label_title"
+                app:layout_constraintEnd_toStartOf="@+id/text_input_initial"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_title_personal_details"
+                app:required="true" />
+
+            <com.trainsplit.trainsplit.widgets.TextInputWidget
+                android:id="@+id/text_input_initial"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="@dimen/keyline_end_1"
+                android:inputType="textPersonName|textNoSuggestions|textCapWords"
+                android:maxLength="4"
+                android:nextFocusDown="@+id/text_input_last"
+                app:hint="@string/hint_please_enter"
+                app:label="@string/label_initial"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/text_input_title"
+                app:layout_constraintTop_toTopOf="@+id/text_input_title"
+                app:required="true" />
+
+            <com.trainsplit.trainsplit.widgets.TextInputWidget
+                android:id="@+id/text_input_last"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_start_1"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="@dimen/keyline_end_1"
+                android:inputType="textPersonName|textNoSuggestions|textCapWords"
+                android:nextFocusDown="@+id/text_input_email"
+                app:hint="@string/hint_please_enter"
+                app:label="@string/label_last"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_input_title"
+                app:required="true" />
+
+            <com.trainsplit.trainsplit.widgets.TextInputWidget
+                android:id="@+id/text_input_email"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_start_1"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="@dimen/keyline_end_1"
+                android:inputType="textEmailAddress"
+                android:nextFocusDown="@+id/text_input_phone"
+                app:hint="@string/hint_please_enter"
+                app:info="@string/email_justification"
+                app:label="@string/label_email"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_input_last"
+                app:required="true" />
+
+            <com.trainsplit.trainsplit.widgets.TextInputWidget
+                android:id="@+id/text_input_phone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_start_1"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="@dimen/keyline_end_1"
+                android:inputType="phone"
+                android:nextFocusDown="@+id/text_input_postcode"
+                app:hint="@string/hint_please_enter"
+                app:info="@string/phone_justification"
+                app:label="@string/label_phone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_input_email"
+                app:required="true" />
+
+            <com.trainsplit.trainsplit.widgets.UpdateDetailsWidget
+                android:id="@+id/widget_update_details_personal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:animateLayoutChanges="true"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_input_phone"
+                tools:visibility="visible" />
+
+            <View
+                android:id="@+id/divider_2"
+                style="@style/App.Widget.Divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/widget_update_details_personal" />
+
+            <TextView
+                android:id="@+id/text_title_address"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_start_1"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="@dimen/keyline_end_1"
+                android:drawableStart="@drawable/ic_address_24dp"
+                android:drawablePadding="16dp"
+                android:text="@string/label_billing_address"
+                android:textColor="@color/grey_dark"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider_2" />
+
+            <com.trainsplit.trainsplit.widgets.TextInputWidget
+                android:id="@+id/text_input_postcode"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_start_1"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="@dimen/keyline_end_1"
+                android:inputType="textCapCharacters|textNoSuggestions"
+                app:hint="@string/hint_postcode"
+                app:label="@string/label_postcode"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_title_address"
+                app:required="true" />
+
+            <CheckBox
+                android:id="@+id/checkbox_outside_uk"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_start_1"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="@dimen/keyline_end_1"
+                android:button="@drawable/button_draw_checkbox"
+                android:gravity="center_vertical"
+                android:minHeight="48dp"
+                android:paddingStart="8dp"
+                android:text="@string/action_outside_uk"
+                android:textColor="@color/grey_mid_dark"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_input_postcode"
+                tools:ignore="RtlSymmetry" />
+
+            <com.trainsplit.trainsplit.widgets.UpdateDetailsWidget
+                android:id="@+id/widget_update_details_address"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/checkbox_outside_uk"
+                tools:visibility="visible" />
+
+            <View
+                android:id="@+id/divider_3"
+                style="@style/App.Widget.Divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/widget_update_details_address" />
+
+            <include
+                android:id="@+id/layout_price_summary"
+                layout="@layout/view_price_summary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider_3" />
+
+            <CheckBox
+                android:id="@+id/checkbox_marketing"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_start_1"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="@dimen/keyline_end_1"
+                android:button="@drawable/button_draw_checkbox"
+                android:gravity="center_vertical"
+                android:minHeight="48dp"
+                android:paddingStart="8dp"
+                android:text="@string/marketing_question"
+                android:textColor="@color/grey_mid_dark"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout_price_summary"
+                tools:ignore="RtlSymmetry" />
+
+            <CheckBox
+                android:id="@+id/checkbox_terms"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_start_1"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="@dimen/keyline_end_1"
+                android:button="@drawable/button_draw_checkbox"
+                android:gravity="top"
+                android:minHeight="48dp"
+                android:paddingStart="8dp"
+                android:text="@string/terms_acceptance_html"
+                android:textColor="@color/grey_mid_dark"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/checkbox_marketing"
+                tools:ignore="RtlSymmetry" />
+
+            <Button
+                android:id="@+id/button_next"
+                style="@style/ButtonStyle.Primary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
+                android:text="@string/action_proceed_to_purchase"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/checkbox_terms" />
+
+            <ProgressBar
+                android:id="@+id/progress_next"
+                style="@style/App.Widget.ProgressBar.OnButton"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/button_next"
+                app:layout_constraintEnd_toEndOf="@+id/button_next"
+                app:layout_constraintStart_toStartOf="@+id/button_next"
+                app:layout_constraintTop_toTopOf="@+id/button_next" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                android:contentDescription="@string/label_national_rail_accredited"
+                android:src="@drawable/img_nat_accredited"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button_next" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/relative_progress"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/colorSurface"
+        android:visibility="gone"
+        tools:visibility="gone">
+
+        <include
+            android:id="@+id/layout_spinner"
+            layout="@layout/view_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+
+    </RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

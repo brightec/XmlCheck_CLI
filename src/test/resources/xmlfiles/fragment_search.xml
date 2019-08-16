@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data></data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:background="@drawable/img_search_background">
+
+        <!--Dummy view to stop focus-->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+
+            <requestFocus />
+        </View>
+
+        <TextView
+            android:id="@+id/text_saving"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="58dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center"
+            android:text="@string/search_saving_text"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <include
+            android:id="@+id/layout_spinner"
+            layout="@layout/view_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+        <ScrollView
+            android:id="@+id/scroll_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never">
+
+            <FrameLayout
+                android:id="@+id/frame_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </ScrollView>
+
+        <RelativeLayout
+            android:id="@+id/relative_summary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/blue_light"
+            android:paddingBottom="16dp"
+            android:visibility="gone"
+            app:elevation="@{4}"
+            tools:visibility="visible">
+
+            <Button
+                android:id="@+id/button_edit"
+                style="@style/ButtonStyle.Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:minHeight="0dp"
+                android:text="@string/action_edit" />
+
+            <TextView
+                android:id="@+id/text_stations"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_toStartOf="@+id/button_edit"
+                android:textColor="@color/grey_dark"
+                android:textSize="14sp"
+                tools:text="Brighton > Edinburgh" />
+
+            <TextView
+                android:id="@+id/text_outbound"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text_stations"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_toStartOf="@+id/button_edit"
+                android:drawablePadding="8dp"
+                android:textColor="@color/grey_dark"
+                android:textSize="14sp"
+                tools:text="Departing after 09:00 on Mon 31 Jan"
+                tools:visibility="gone" />
+
+            <TextView
+                android:id="@+id/text_return"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text_outbound"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_toStartOf="@+id/button_edit"
+                android:drawableStart="@drawable/ic_return_arrow_grey_dark_18dp"
+                android:drawablePadding="8dp"
+                android:textColor="@color/grey_dark"
+                android:textSize="14sp"
+                tools:text="Returning after 12:00 on Mon 31 Jan"
+                tools:visibility="gone" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+</layout>

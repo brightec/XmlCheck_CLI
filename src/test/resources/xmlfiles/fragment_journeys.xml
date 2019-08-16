@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    tools:background="@color/white">
+
+    <include
+        android:id="@+id/layout_spinner"
+        layout="@layout/view_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="gone" />
+
+    <TextView
+        android:id="@+id/text_empty_1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/keyline_start_2"
+        android:layout_marginEnd="@dimen/keyline_end_2"
+        android:text="@string/journey_list_empty_1"
+        android:textAlignment="center"
+        android:textColor="@color/grey_mid_dark"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/text_empty_2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/text_empty_2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/keyline_start_2"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="@dimen/keyline_end_2"
+        android:text="@string/journey_list_empty_2"
+        android:textAlignment="center"
+        android:textColor="@color/grey_mid_dark"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/button_book_a_journey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_empty_1" />
+
+    <Button
+        android:id="@+id/button_book_a_journey"
+        style="@style/ButtonStyle.Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="@dimen/keyline_start_2"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="@dimen/keyline_end_2"
+        android:text="@string/action_book_journey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_empty_2" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_empty"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:constraint_referenced_ids="text_empty_1,text_empty_2,button_book_a_journey"
+        tools:visibility="gone" />
+
+    <TextView
+        android:id="@+id/text_error"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/keyline_start_2"
+        android:layout_marginEnd="@dimen/keyline_end_2"
+        android:text="@string/error_journey_list"
+        android:textAlignment="center"
+        android:textColor="@color/grey_mid_dark"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/button_retry"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <Button
+        android:id="@+id/button_retry"
+        style="@style/ButtonStyle.Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="@dimen/keyline_start_2"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="@dimen/keyline_end_2"
+        android:text="@string/action_retry"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_error" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_error"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:constraint_referenced_ids="text_error,button_retry"
+        tools:visibility="gone" />
+
+    <FrameLayout
+        android:id="@+id/frame_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:visibility="gone" />
+
+    <ScrollView
+        android:id="@+id/scroll_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true">
+
+            <TextView
+                android:id="@+id/text_label_upcoming"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:text="@string/label_upcoming_journeys"
+                android:textColor="@color/blue_dark"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/divider_1"
+                style="@style/App.Widget.Divider.Blue"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="64dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="64dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_label_upcoming" />
+
+            <TextView
+                android:id="@+id/text_hint_tap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:text="@string/hint_tap_ticket_details"
+                android:textColor="@color/grey_mid_dark"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider_1" />
+
+            <LinearLayout
+                android:id="@+id/linear_upcoming"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_hint_tap"
+                tools:background="@color/blue_light"
+                tools:minHeight="100dp" />
+
+            <Button
+                android:id="@+id/button_help_collecting"
+                style="@style/ButtonStyle.Link"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="8dp"
+                android:text="@string/action_help_collecting"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linear_upcoming" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group_upcoming"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:constraint_referenced_ids="text_label_upcoming,divider_1,text_hint_tap,linear_upcoming,button_help_collecting" />
+
+            <View
+                android:id="@+id/view_review_background"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/grey_light"
+                app:layout_constraintBottom_toBottomOf="@+id/space_review"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button_help_collecting" />
+
+            <TextView
+                android:id="@+id/text_review"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_start_2"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="@dimen/keyline_end_2"
+                android:text="@string/leave_a_review"
+                android:textAlignment="center"
+                android:textColor="@color/blue_dark"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button_help_collecting" />
+
+            <Button
+                android:id="@+id/button_review_negative"
+                style="@style/ButtonStyle.Secondary.ReviewNegative"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_start_1"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="16dp"
+                android:layout_weight="1"
+                android:text="@string/action_dont_ask"
+                app:layout_constraintEnd_toStartOf="@+id/button_review_positive"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_review" />
+
+            <Button
+                android:id="@+id/button_review_positive"
+                style="@style/ButtonStyle.Secondary.ReviewPositive"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="@dimen/keyline_end_1"
+                android:layout_marginBottom="16dp"
+                android:layout_weight="1"
+                android:text="@string/action_review_yes"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/button_review_negative"
+                app:layout_constraintTop_toTopOf="@+id/button_review_negative" />
+
+            <Space
+                android:id="@+id/space_review"
+                android:layout_width="0dp"
+                android:layout_height="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button_review_negative" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group_review"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="gone"
+                app:constraint_referenced_ids="text_review,button_review_negative,button_review_positive,view_review_background,space_review"
+                tools:visibility="visible" />
+
+            <View
+                android:id="@+id/divider_2"
+                style="@style/App.Widget.Divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/space_review" />
+
+            <TextView
+                android:id="@+id/text_previous_journeys"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_start_1"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="@dimen/keyline_end_1"
+                android:layout_marginBottom="16dp"
+                android:text="@string/label_previous_journeys"
+                android:textColor="@color/blue_dark"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider_2" />
+
+            <View
+                android:id="@+id/divider_3"
+                style="@style/App.Widget.Divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_previous_journeys" />
+
+            <LinearLayout
+                android:id="@+id/linear_previous"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider_3"
+                tools:background="@color/blue_light"
+                tools:minHeight="100dp" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group_previous"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:constraint_referenced_ids="divider_2,text_previous_journeys,divider_3,linear_previous" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

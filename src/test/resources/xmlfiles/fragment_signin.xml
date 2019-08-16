@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraint_signin"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/bg_dialog">
+
+            <ImageView
+                android:id="@+id/image_initial"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:src="@drawable/ic_account_48dp"
+                app:layout_constraintBottom_toTopOf="@+id/text_initial_info"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/text_initial_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="48dp"
+                android:gravity="center"
+                android:textColor="@color/grey_mid_dark"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@+id/button_initial_signin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/image_initial"
+                tools:text="@string/signin_info_journey_details" />
+
+            <Button
+                android:id="@+id/button_initial_signin"
+                style="@style/ButtonStyle.Primary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="24dp"
+                android:text="@string/action_signin"
+                app:layout_constraintBottom_toTopOf="@+id/button_initial_create_account"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_initial_info" />
+
+            <Button
+                android:id="@+id/button_initial_create_account"
+                style="@style/ButtonStyle.Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:text="@string/action_create_account"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button_initial_signin" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group_initial_form"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="gone"
+                app:constraint_referenced_ids="image_initial,text_initial_info,button_initial_signin,button_initial_create_account"
+                tools:layout_editor_absoluteX="10dp"
+                tools:layout_editor_absoluteY="10dp"
+                tools:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/image_signin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:src="@mipmap/ic_launcher"
+                app:layout_constraintBottom_toTopOf="@+id/text_signin_info"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/text_signin_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="48dp"
+                android:gravity="center"
+                android:text="@string/signin_benefits"
+                android:textColor="@color/grey_mid_dark"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@+id/button_signin_google"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/image_signin" />
+
+            <Button
+                android:id="@+id/button_signin_google"
+                style="@style/ButtonStyle.Primary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
+                android:drawableStart="@drawable/ic_google_white_24dp"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:text="@string/action_continue_google"
+                app:layout_constraintBottom_toTopOf="@+id/button_signin_facebook"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_signin_info" />
+
+            <Button
+                android:id="@+id/button_signin_facebook"
+                style="@style/ButtonStyle.Primary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
+                android:drawableStart="@drawable/ic_facebook_white_24dp"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:text="@string/action_continue_facebook"
+                app:layout_constraintBottom_toTopOf="@+id/button_signin_email"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button_signin_google" />
+
+            <Button
+                android:id="@+id/button_signin_email"
+                style="@style/ButtonStyle.Primary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="24dp"
+                android:drawableStart="@drawable/ic_email_white_24dp"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:text="@string/action_continue_email"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button_signin_facebook" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group_signin_form"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="gone"
+                app:constraint_referenced_ids="image_signin,text_signin_info,button_signin_google,button_signin_facebook,button_signin_email"
+                tools:layout_editor_absoluteX="10dp"
+                tools:layout_editor_absoluteY="10dp"
+                tools:visibility="gone" />
+
+            <com.trainsplit.trainsplit.widgets.TextInputWidget
+                android:id="@+id/textinput_signin_email_email"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
+                android:inputType="textEmailAddress"
+                android:nextFocusDown="@+id/textinput_signin_email_password"
+                app:hint="@string/hint_please_enter"
+                app:label="@string/label_email"
+                app:layout_constraintBottom_toTopOf="@+id/textinput_signin_email_password"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                app:required="true" />
+
+            <com.trainsplit.trainsplit.widgets.TextInputWidget
+                android:id="@+id/textinput_signin_email_password"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
+                android:fontFamily="sans-serif"
+                android:inputType="textPassword"
+                app:hint="@string/hint_please_enter"
+                app:label="@string/label_password"
+                app:layout_constraintBottom_toTopOf="@+id/button_signin_email_signin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textinput_signin_email_email"
+                app:required="true" />
+
+            <Button
+                android:id="@+id/button_signin_email_signin"
+                style="@style/ButtonStyle.Primary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
+                android:text="@string/action_signin"
+                app:layout_constraintBottom_toTopOf="@+id/button_signin_email_reset_password"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textinput_signin_email_password" />
+
+            <Button
+                android:id="@+id/button_signin_email_reset_password"
+                style="@style/ButtonStyle.Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
+                android:text="@string/action_reset_password"
+                app:layout_constraintBottom_toTopOf="@+id/text_signin_email_no_account"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button_signin_email_signin" />
+
+            <TextView
+                android:id="@+id/text_signin_email_no_account"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
+                android:gravity="center"
+                android:text="@string/no_account"
+                android:textColor="@color/grey_mid_dark"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@+id/button_signin_email_create_account"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button_signin_email_reset_password" />
+
+            <Button
+                android:id="@+id/button_signin_email_create_account"
+                style="@style/ButtonStyle.Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="24dp"
+                android:text="@string/action_create_account"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_signin_email_no_account" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group_signin_email_form"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="gone"
+                app:constraint_referenced_ids="textinput_signin_email_email,textinput_signin_email_password,button_signin_email_signin,button_signin_email_reset_password,text_signin_email_no_account,button_signin_email_create_account"
+                tools:layout_editor_absoluteX="10dp"
+                tools:layout_editor_absoluteY="10dp"
+                tools:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/image_create"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:src="@mipmap/ic_launcher"
+                app:layout_constraintBottom_toTopOf="@+id/text_create_info"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/text_create_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:gravity="center"
+                android:text="@string/create_accounts_benefits"
+                android:textColor="@color/grey_mid_dark"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@+id/button_create_google"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/image_create" />
+
+            <Button
+                android:id="@+id/button_create_google"
+                style="@style/ButtonStyle.Primary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
+                android:drawableStart="@drawable/ic_google_white_24dp"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:text="@string/action_continue_google"
+                app:layout_constraintBottom_toTopOf="@+id/button_create_facebook"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_create_info" />
+
+            <Button
+                android:id="@+id/button_create_facebook"
+                style="@style/ButtonStyle.Primary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
+                android:drawableStart="@drawable/ic_facebook_white_24dp"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:text="@string/action_continue_facebook"
+                app:layout_constraintBottom_toTopOf="@+id/button_create_email"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button_create_google" />
+
+            <Button
+                android:id="@+id/button_create_email"
+                style="@style/ButtonStyle.Primary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="24dp"
+                android:drawableStart="@drawable/ic_email_white_24dp"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:text="@string/action_continue_email"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button_create_facebook" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group_create_form"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="gone"
+                app:constraint_referenced_ids="image_create,text_create_info,button_create_google,button_create_facebook,button_create_email"
+                tools:layout_editor_absoluteX="10dp"
+                tools:layout_editor_absoluteY="10dp"
+                tools:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/image_create_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:src="@mipmap/ic_launcher"
+                app:layout_constraintBottom_toTopOf="@+id/text_create_email_info"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/text_create_email_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:gravity="center"
+                android:text="@string/create_accounts_benefits"
+                android:textColor="@color/grey_mid_dark"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@+id/textinput_create_email_email"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/image_create_email" />
+
+            <com.trainsplit.trainsplit.widgets.TextInputWidget
+                android:id="@+id/textinput_create_email_email"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
+                android:inputType="textEmailAddress"
+                android:nextFocusDown="@+id/textinput_create_email_password"
+                app:hint="@string/hint_please_enter"
+                app:label="@string/label_email"
+                app:layout_constraintBottom_toTopOf="@+id/textinput_create_email_password"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_create_email_info"
+                app:required="true" />
+
+            <com.trainsplit.trainsplit.widgets.TextInputWidget
+                android:id="@+id/textinput_create_email_password"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
+                android:fontFamily="sans-serif"
+                android:inputType="textPassword"
+                app:hint="@string/hint_please_enter"
+                app:label="@string/label_password"
+                app:layout_constraintBottom_toTopOf="@+id/button_create_email_create"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textinput_create_email_email"
+                app:required="true" />
+
+            <Button
+                android:id="@+id/button_create_email_create"
+                style="@style/ButtonStyle.Primary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
+                android:text="@string/action_create_account"
+                app:layout_constraintBottom_toTopOf="@+id/text_create_email_got_account"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textinput_create_email_password" />
+
+            <TextView
+                android:id="@+id/text_create_email_got_account"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
+                android:gravity="center"
+                android:text="@string/got_account"
+                android:textColor="@color/grey_mid_dark"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@+id/button_create_email_signin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button_create_email_create" />
+
+            <Button
+                android:id="@+id/button_create_email_signin"
+                style="@style/ButtonStyle.Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="24dp"
+                android:text="@string/action_signin"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_create_email_got_account" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group_create_email_form"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="gone"
+                app:constraint_referenced_ids="image_create_email,text_create_email_info,textinput_create_email_email,textinput_create_email_password,button_create_email_create,text_create_email_got_account,button_create_email_signin"
+                tools:layout_editor_absoluteX="10dp"
+                tools:layout_editor_absoluteY="10dp"
+                tools:visibility="gone" />
+
+            <include
+                android:id="@+id/layout_spinner"
+                layout="@layout/view_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="gone" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

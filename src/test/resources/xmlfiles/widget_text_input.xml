@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:tools="http://schemas.android.com/tools"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:animateLayoutChanges="true">
+
+    <TextView
+        android:id="@+id/text_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:labelFor="@+id/autotext"
+        android:textSize="12sp"
+        tools:text="Label:"
+        tools:ignore="LabelFor" />
+
+    <AutoCompleteTextView
+        android:id="@+id/autotext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_label"
+        android:layout_marginEnd="-4dp"
+        android:layout_marginStart="-4dp"
+        android:inputType="text|textNoSuggestions"
+        android:textColorHint="@color/blue_dark_70"
+        android:textSize="16sp"
+        android:imeOptions="actionDone"
+        tools:hint="Please enter..."/>
+
+    <TextView
+        android:id="@+id/text_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/autotext"
+        android:textSize="12sp"
+        android:visibility="gone"
+        tools:text="Info info info info info"/>
+
+</merge>

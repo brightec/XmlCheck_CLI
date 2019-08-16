@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:app="http://schemas.android.com/apk/res-auto"
+       xmlns:tools="http://schemas.android.com/tools"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+    <TextView
+        android:id="@+id/text_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="48dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:textColor="@color/grey_dark"
+        android:textSize="14sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/label_results_departing_times"
+        tools:visibility="visible"/>
+
+    <LinearLayout
+        android:id="@+id/layout_chart_key"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_title">
+
+        <View
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/green_circle"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:text="@string/label_cheapest"
+            android:textColor="@color/grey_mid_dark"
+            android:textSize="12sp"/>
+
+        <View
+            android:layout_width="16dp"
+            android:layout_height="4dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="4dp"
+            android:background="@color/yellow_normal"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:text="@string/label_slow_route"
+            android:textColor="@color/grey_mid_dark"
+            android:textSize="12sp"/>
+
+        <View
+            android:id="@+id/view_station_cost_line"
+            android:layout_width="13dp"
+            android:layout_height="2dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/dashed_line"
+            android:layerType="software"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_station_cost"
+            android:textColor="@color/grey_mid_dark"
+            android:textSize="12sp"/>
+    </LinearLayout>
+
+    <HorizontalScrollView
+        android:id="@+id/scroll_chart"
+        android:layout_width="0dp"
+        android:layout_height="162dp"
+        android:layout_marginTop="16dp"
+        android:fadingEdgeLength="32dp"
+        android:requiresFadingEdge="horizontal"
+        android:scrollbars="none"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_chart_key"
+        tools:visibility="visible">
+
+        <LinearLayout
+            android:id="@+id/linear_chart"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:paddingEnd="16dp"
+            tools:ignore="RtlSymmetry"/>
+    </HorizontalScrollView>
+</merge>

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.trainsplit.trainsplit.util.Utils" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.trainsplit.trainsplit.widgets.PriceSummaryModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:cardCornerRadius="8dp"
+        android:contentDescription="@string/price_summary_descriptive">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:shrinkColumns="0"
+            android:stretchColumns="0"
+            android:focusable="true">
+
+            <TableRow
+                android:minHeight="24dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|end"
+                    android:text="@string/label_fare"
+                    android:textColor="@color/grey_dark"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/text_fare"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:gravity="end"
+                    android:layout_gravity="center_vertical"
+                    android:text="@{Utils.getCurrencyStringForDisplay(viewModel.farePrice)}"
+                    android:textColor="@color/grey_dark"
+                    android:textSize="14sp"
+                    tools:text="£59.20" />
+            </TableRow>
+
+            <TableRow
+                android:minHeight="24dp"
+                android:visibility="@{viewModel.fareCommission != 0 ? View.VISIBLE : View.GONE}">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|end">
+
+                    <ImageButton
+                        android:id="@+id/button_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="8dp"
+                        android:background="@null"
+                        android:contentDescription="@string/action_more_info"
+                        android:src="@drawable/ic_info_dark_24dp"/>
+
+                    <TextView
+                        android:id="@+id/text_trainsplit_share_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical|end"
+                        android:text="@string/label_trainsplit_share"
+                        android:textColor="@color/grey_dark"
+                        android:textSize="14sp"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/text_trainsplit_share"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="8dp"
+                    android:gravity="end"
+                    android:text="@{Utils.getCurrencyStringForDisplay(viewModel.fareCommission)}"
+                    android:textColor="@color/grey_dark"
+                    android:textSize="14sp"
+                    tools:text="£0.28" />
+            </TableRow>
+
+            <TableRow
+                android:minHeight="24dp"
+                android:visibility="@{viewModel.deliveryFee != null &amp;&amp; viewModel.deliveryFee.intValue() != 0 ? View.VISIBLE : View.GONE}">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|end"
+                    android:text="@string/label_delivery_fee"
+                    android:textColor="@color/grey_dark"
+                    android:textSize="14sp"/>
+
+                <TextView
+                    android:id="@+id/text_delivery_fee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="end"
+                    android:text="@{viewModel.deliveryFee != null ? Utils.getCurrencyStringForDisplay(viewModel.deliveryFee) : null}"
+                    android:textColor="@color/grey_dark"
+                    android:textSize="14sp"
+                    tools:text="£59.20"/>
+            </TableRow>
+
+            <TableRow
+                android:minHeight="24dp"
+                android:visibility="@{viewModel.bookingFee != null &amp;&amp; viewModel.bookingFee.intValue() != 0 ? View.VISIBLE : View.GONE}">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|end"
+                    android:text="@string/label_booking_fee"
+                    android:textColor="@color/grey_dark"
+                    android:textSize="14sp"/>
+
+                <TextView
+                    android:id="@+id/text_booking_fee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="end"
+                    android:text="@{viewModel.bookingFee != null ? Utils.getCurrencyStringForDisplay(viewModel.bookingFee) : null}"
+                    android:textColor="@color/grey_dark"
+                    android:textSize="14sp"
+                    tools:text="£59.20"/>
+            </TableRow>
+
+            <TableRow
+                android:minHeight="24dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|end"
+                    android:text="@string/label_total_price"
+                    android:textColor="@color/blue_normal"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/text_total_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="8dp"
+                    android:gravity="end"
+                    android:text="@{Utils.getCurrencyStringForDisplay(viewModel.totalPrice)}"
+                    android:textColor="@color/blue_normal"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    tools:text="£59.48" />
+            </TableRow>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="@color/colorDivider"
+                android:visibility="@{viewModel.fareSaving != 0 ? View.VISIBLE : View.GONE}" />
+
+            <TableRow
+                android:minHeight="24dp"
+                android:visibility="@{viewModel.fareSaving != 0 ? View.VISIBLE : View.GONE}">
+
+                <TextView
+                    android:id="@+id/text_your_saving_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|end"
+                    android:text="@string/label_your_saving"
+                    android:textColor="@color/grey_dark"
+                    android:textSize="14sp"/>
+
+                <TextView
+                    android:id="@+id/text_your_saving"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="end"
+                    android:text="@{Utils.getCurrencyStringForDisplay(viewModel.fareSaving)}"
+                    android:textColor="@color/grey_dark"
+                    android:textSize="14sp"
+                    tools:text="£2.52" />
+            </TableRow>
+
+        </TableLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

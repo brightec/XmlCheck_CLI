@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data></data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_station_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="160dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/text_title_journey_planner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:drawableStart="@drawable/ic_journey_planner_24dp"
+                android:drawablePadding="16dp"
+                android:gravity="center_vertical"
+                android:text="@string/title_journey_planner"
+                android:textColor="@color/grey_dark"
+                android:textSize="16sp" />
+
+            <ProgressBar
+                android:id="@+id/progress_stations"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/text_title_journey_planner"
+                android:layout_alignBottom="@+id/text_title_journey_planner"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="2dp"
+                android:visibility="gone" />
+
+            <com.trainsplit.trainsplit.widgets.TextInputWidget
+                android:id="@+id/textinput_from"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text_title_journey_planner"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                app:hint="@string/hint_please_enter"
+                app:label="@string/label_from"
+                app:mustMatch="true"
+                app:required="true" />
+
+            <ImageButton
+                android:id="@+id/button_from_clear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/textinput_from"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="12dp"
+                android:background="@null"
+                android:contentDescription="@string/action_clear_from"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
+                android:src="@drawable/ic_clear_black_24dp"
+                android:tint="@color/grey_mid_dark"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+            <com.trainsplit.trainsplit.widgets.TextInputWidget
+                android:id="@+id/textinput_to"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textinput_from"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                app:hint="@string/hint_please_enter"
+                app:label="@string/label_to"
+                app:mustMatch="true"
+                app:required="true" />
+
+            <ImageButton
+                android:id="@+id/button_to_clear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/textinput_to"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="12dp"
+                android:background="@null"
+                android:contentDescription="@string/action_clear_to"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
+                android:src="@drawable/ic_clear_black_24dp"
+                android:tint="@color/grey_mid_dark"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+            <Button
+                android:id="@+id/button_next"
+                style="@style/ButtonStyle.Primary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textinput_to"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="36dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="24dp"
+                android:text="@string/action_add_journey_times" />
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

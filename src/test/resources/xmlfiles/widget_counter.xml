@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp">
+
+    <View
+        android:id="@+id/view_touch_btn_minus"
+        android:layout_width="52dp"
+        android:layout_height="match_parent"
+        android:layout_alignStart="@+id/btn_minus"
+        android:layout_marginStart="-12dp"/>
+
+    <Button
+        android:id="@+id/btn_minus"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="12dp"
+        android:background="@drawable/bg_counter_button"
+        android:contentDescription="@string/action_decrease"
+        android:text="@string/minus_symbol"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/text_number"
+        android:layout_width="48dp"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/btn_minus"
+        android:accessibilityLiveRegion="polite"
+        android:background="@drawable/bg_counter_number"
+        android:gravity="center"
+        android:textColor="@color/grey_dark"
+        android:textSize="24sp"
+        tools:text="1"/>
+
+    <Button
+        android:id="@+id/btn_plus"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="12dp"
+        android:layout_toEndOf="@+id/text_number"
+        android:background="@drawable/bg_counter_button"
+        android:contentDescription="@string/action_increase"
+        android:text="@string/plus_symbol"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+    <View
+        android:id="@+id/view_touch_btn_plus"
+        android:layout_width="52dp"
+        android:layout_height="match_parent"
+        android:layout_alignEnd="@+id/btn_plus"
+        android:layout_marginEnd="-12dp"/>
+
+</RelativeLayout>
