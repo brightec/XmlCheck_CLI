@@ -9,6 +9,8 @@ import org.w3c.dom.NodeList
 import org.xml.sax.InputSource
 import uk.co.brightec.xmlcheck.rules.NodeCheck
 import uk.co.brightec.xmlcheck.rules.android.*
+import uk.co.brightec.xmlcheck.rules.android.color.TextColor
+import uk.co.brightec.xmlcheck.rules.android.color.Tint
 import uk.co.brightec.xmlcheck.rules.android.constraint.*
 import uk.co.brightec.xmlcheck.rules.android.margin.LayoutMarginBottom
 import uk.co.brightec.xmlcheck.rules.android.margin.LayoutMarginEnd
@@ -26,18 +28,26 @@ class Checker : CliktCommand() {
         help = "The path to your xml dir"
     ).default("./src/test/resources/xmlfiles")
 
-    private val allNodeChecks: List<NodeCheck> = listOf(
-        Id(),
-        LayoutConstraintStartToStartOf(),
-        LayoutConstraintStartToEndOf(),
-        LayoutConstraintEndToStartOf(),
-        LayoutConstraintEndToEndOf(),
-        LayoutConstraintTopToTopOf(),
-        LayoutConstraintTopToBottomOf(),
-        LayoutConstraintBottomToTopOf(),
-        LayoutConstraintBottomToBottomOf(),
+    private val colorNodeChecks: List<NodeCheck> = listOf(
+        TextColor(), Tint()
+    )
+    private val constraintNodeChecks: List<NodeCheck> = listOf(
+        LayoutConstraintStartToStartOf(), LayoutConstraintStartToEndOf(),
+        LayoutConstraintEndToStartOf(), LayoutConstraintEndToEndOf(),
+        LayoutConstraintTopToTopOf(), LayoutConstraintTopToBottomOf(),
+        LayoutConstraintBottomToTopOf(), LayoutConstraintBottomToBottomOf()
+    )
+    private val marginsChecks: List<NodeCheck> = listOf(
         LayoutMarginStart(), LayoutMarginEnd(), LayoutMarginTop(), LayoutMarginBottom()
     )
+    private val allNodeChecks: List<NodeCheck> = arrayListOf(
+        Id(),
+        TextSize()
+    ).apply {
+        addAll(colorNodeChecks)
+        addAll(constraintNodeChecks)
+        addAll(marginsChecks)
+    }
 
     private val dbFactory = DocumentBuilderFactory.newInstance()
     private val dBuilder = dbFactory.newDocumentBuilder()
