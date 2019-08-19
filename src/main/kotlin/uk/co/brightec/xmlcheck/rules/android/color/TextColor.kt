@@ -1,15 +1,15 @@
 package uk.co.brightec.xmlcheck.rules.android.color
 
-import org.w3c.dom.Node
+import org.w3c.dom.Attr
 import uk.co.brightec.xmlcheck.Constants.ATTR_NAMESPACE_ANDROID
-import uk.co.brightec.xmlcheck.Constants.ATTR_NAMESPACE_APP
+import uk.co.brightec.xmlcheck.Failure
 
 class TextColor : Color() {
 
-    override val nodeName: String
+    override val attrName: String
         get() = "$ATTR_NAMESPACE_ANDROID:textColor"
 
-    override fun run(node: Node, tag: String) {
-        super.run(node, tag)
+    override fun run(attr: Attr): Failure? {
+        return super.run(attr)
     }
 }

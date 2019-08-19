@@ -1,15 +1,15 @@
 package uk.co.brightec.xmlcheck.rules.android.margin
 
-import org.w3c.dom.Node
+import org.w3c.dom.Attr
 import uk.co.brightec.xmlcheck.Constants.ATTR_NAMESPACE_ANDROID
-import uk.co.brightec.xmlcheck.Constants.ATTR_NAMESPACE_APP
+import uk.co.brightec.xmlcheck.Failure
 
 class LayoutMarginEnd : Margin() {
 
-    override val nodeName: String
+    override val attrName: String
         get() = "$ATTR_NAMESPACE_ANDROID:layout_marginEnd"
 
-    override fun run(node: Node, tag: String) {
-        super.run(node, tag)
+    override fun run(attr: Attr): Failure? {
+        return super.run(attr)
     }
 }

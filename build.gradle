@@ -16,7 +16,10 @@ application {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-    implementation 'com.github.ajalt:clikt:2.1.0'
+    implementation "org.jetbrains.kotlin:kotlin-reflect"
+    implementation "com.github.ajalt:clikt:2.1.0"
+
+    testImplementation "org.junit.jupiter:junit-jupiter:5.5.1"
 }
 
 compileKotlin {
@@ -24,6 +27,13 @@ compileKotlin {
 }
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
+}
+
+tasks.test {
+    useJUnitPlatform()
+    testLogging {
+        events("passed", "skipped", "failed")
+    }
 }
 
 task runMain(type: Exec) {

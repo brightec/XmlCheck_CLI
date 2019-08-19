@@ -1,13 +1,16 @@
 package uk.co.brightec.xmlcheck.rules.android.constraint
 
-import org.w3c.dom.Node
-import uk.co.brightec.xmlcheck.rules.NodeCheck
+import org.w3c.dom.Attr
+import uk.co.brightec.xmlcheck.Failure
+import uk.co.brightec.xmlcheck.rules.AttrCheck
 
-abstract class ConstraintAnchor : NodeCheck() {
+abstract class ConstraintAnchor : AttrCheck() {
 
-    override fun run(node: Node, tag: String) {
-        if (node.nodeValue != "parent" && !node.nodeValue.startsWith("@+id/")) {
-            error("$tag: $nodeName - Doesn't start with @+id/")
+    override fun run(attr: Attr): Failure? {
+        if (attr.value != "parent" && !attr.value.startsWith("@+id/")) {
+            return failure(attr, "Doesn't start with @+id/")
         }
+
+        return null
     }
 }

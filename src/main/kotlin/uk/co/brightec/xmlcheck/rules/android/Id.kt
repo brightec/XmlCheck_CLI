@@ -1,17 +1,20 @@
 package uk.co.brightec.xmlcheck.rules.android
 
-import org.w3c.dom.Node
-import uk.co.brightec.xmlcheck.rules.NodeCheck
+import org.w3c.dom.Attr
 import uk.co.brightec.xmlcheck.Constants.ATTR_NAMESPACE_ANDROID
+import uk.co.brightec.xmlcheck.Failure
+import uk.co.brightec.xmlcheck.rules.AttrCheck
 
-class Id : NodeCheck() {
+class Id : AttrCheck() {
 
-    override val nodeName: String
+    override val attrName: String
         get() = "$ATTR_NAMESPACE_ANDROID:id"
 
-    override fun run(node: Node, tag: String) {
-        if (!node.nodeValue.startsWith("@+id/")) {
-            error("$tag: $nodeName - Doesn't start with @+id/")
+    override fun run(attr: Attr): Failure? {
+        if (!attr.value.startsWith("@+id/")) {
+            return failure(attr, "Doesn't start with @+id/")
         }
+
+        return null
     }
 }

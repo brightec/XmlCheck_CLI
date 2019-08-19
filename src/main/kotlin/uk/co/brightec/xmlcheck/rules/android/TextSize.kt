@@ -1,18 +1,20 @@
 package uk.co.brightec.xmlcheck.rules.android
 
-import org.w3c.dom.Node
-import uk.co.brightec.xmlcheck.Constants
+import org.w3c.dom.Attr
 import uk.co.brightec.xmlcheck.Constants.ATTR_NAMESPACE_ANDROID
-import uk.co.brightec.xmlcheck.rules.NodeCheck
+import uk.co.brightec.xmlcheck.Failure
+import uk.co.brightec.xmlcheck.rules.AttrCheck
 
-class TextSize : NodeCheck() {
+class TextSize : AttrCheck() {
 
-    override val nodeName: String
+    override val attrName: String
         get() = "$ATTR_NAMESPACE_ANDROID:textSize"
 
-    override fun run(node: Node, tag: String) {
-        if (!node.nodeValue.endsWith("sp")) {
-            error("$tag: $nodeName - Should be specified in sp")
+    override fun run(attr: Attr): Failure? {
+        if (!attr.value.endsWith("sp")) {
+            return failure(attr, "Should be specified in sp")
         }
+
+        return null
     }
 }
