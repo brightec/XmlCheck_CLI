@@ -1,12 +1,12 @@
-package uk.co.brightec.xmlcheck.rules.android.margin
+package uk.co.brightec.xmlcheck.rules.attr.android.margin
 
 import org.w3c.dom.Attr
 import uk.co.brightec.xmlcheck.Failure
-import uk.co.brightec.xmlcheck.rules.AttrCheck
+import uk.co.brightec.xmlcheck.rules.attr.AttrCheck
 
 abstract class Margin : AttrCheck() {
 
-    override fun run(attr: Attr): Failure? {
+    override fun run(attr: Attr): Failure<Attr>? {
         if (attr.value.endsWith("dp")) {
             val value = attr.value.substringBefore("dp").toInt()
             if (value.rem(2) != 0) {

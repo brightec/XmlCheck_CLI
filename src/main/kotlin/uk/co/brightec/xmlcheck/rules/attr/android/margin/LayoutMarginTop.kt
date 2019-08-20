@@ -1,15 +1,15 @@
-package uk.co.brightec.xmlcheck.rules.android.color
+package uk.co.brightec.xmlcheck.rules.attr.android.margin
 
 import org.w3c.dom.Attr
 import uk.co.brightec.xmlcheck.Constants.ATTR_NAMESPACE_ANDROID
 import uk.co.brightec.xmlcheck.Failure
 
-class TextColor : Color() {
+class LayoutMarginTop : Margin() {
 
     override val attrName: String
-        get() = "$ATTR_NAMESPACE_ANDROID:textColor"
+        get() = "$ATTR_NAMESPACE_ANDROID:layout_marginTop"
 
-    override fun run(attr: Attr): Failure? {
+    override fun run(attr: Attr): Failure<Attr>? {
         return super.run(attr)
     }
 }

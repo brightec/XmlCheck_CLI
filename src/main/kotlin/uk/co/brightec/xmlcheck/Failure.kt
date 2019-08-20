@@ -1,10 +1,10 @@
 package uk.co.brightec.xmlcheck
 
-import org.w3c.dom.Attr
+import org.w3c.dom.Node
 import kotlin.reflect.KClass
 
-data class Failure(
+data class Failure<T : Node>(
     val ruleClass: KClass<*>,
-    val attr: Attr,
+    val node: T,
     val errorMessage: String
 )

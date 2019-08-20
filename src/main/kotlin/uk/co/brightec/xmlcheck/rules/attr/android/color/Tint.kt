@@ -1,4 +1,4 @@
-package uk.co.brightec.xmlcheck.rules.android.color
+package uk.co.brightec.xmlcheck.rules.attr.android.color
 
 import org.w3c.dom.Attr
 import uk.co.brightec.xmlcheck.Constants.ATTR_NAMESPACE_ANDROID
@@ -9,7 +9,7 @@ class Tint : Color() {
     override val attrName: String
         get() = "$ATTR_NAMESPACE_ANDROID:tint"
 
-    override fun run(attr: Attr): Failure? {
+    override fun run(attr: Attr): Failure<Attr>? {
         return super.run(attr)
     }
 }

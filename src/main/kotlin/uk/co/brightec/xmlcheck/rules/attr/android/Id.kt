@@ -1,17 +1,17 @@
-package uk.co.brightec.xmlcheck.rules.android
+package uk.co.brightec.xmlcheck.rules.attr.android
 
 import org.w3c.dom.Attr
 import org.w3c.dom.Element
 import uk.co.brightec.xmlcheck.Constants.ATTR_NAMESPACE_ANDROID
 import uk.co.brightec.xmlcheck.Failure
-import uk.co.brightec.xmlcheck.rules.AttrCheck
+import uk.co.brightec.xmlcheck.rules.attr.AttrCheck
 
 class Id : AttrCheck() {
 
     override val attrName: String
         get() = "$ATTR_NAMESPACE_ANDROID:id"
 
-    override fun run(attr: Attr): Failure? {
+    override fun run(attr: Attr): Failure<Attr>? {
         if (!attr.value.startsWith("@+id/")) {
             return failure(attr, "Doesn't start with @+id/")
         }
@@ -71,11 +71,11 @@ class Id : AttrCheck() {
         return false
     }
 
-    private fun splitClassIntoWords(cpt: String): List<String> {
+    private fun splitClassIntoWords(className: String): List<String> {
         val words = arrayListOf<String>()
         var ongoingWord = ""
-        for (i in 0 until cpt.length) {
-            val c = cpt[i]
+        for (i in 0 until className.length) {
+            val c = className[i]
             if (Character.isUpperCase(c)) {
                 if (ongoingWord.isNotEmpty()) {
                     words.add(ongoingWord)

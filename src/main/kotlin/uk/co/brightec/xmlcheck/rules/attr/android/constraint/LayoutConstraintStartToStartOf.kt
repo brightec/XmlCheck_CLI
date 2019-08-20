@@ -1,4 +1,4 @@
-package uk.co.brightec.xmlcheck.rules.android.constraint
+package uk.co.brightec.xmlcheck.rules.attr.android.constraint
 
 import org.w3c.dom.Attr
 import uk.co.brightec.xmlcheck.Constants.ATTR_NAMESPACE_APP
@@ -9,7 +9,7 @@ class LayoutConstraintStartToStartOf : ConstraintAnchor() {
     override val attrName: String
         get() = "$ATTR_NAMESPACE_APP:layout_constraintStart_toStartOf"
 
-    override fun run(attr: Attr): Failure? {
+    override fun run(attr: Attr): Failure<Attr>? {
         return super.run(attr)
     }
 }
