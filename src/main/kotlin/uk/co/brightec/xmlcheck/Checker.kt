@@ -20,6 +20,11 @@ import uk.co.brightec.xmlcheck.rules.element.ElementCheck
 import uk.co.brightec.xmlcheck.rules.element.android.ClassName
 import java.io.File
 
+// TODO : Suppression - The ability to suppress a rule for a given element
+// Think about using tools:ignore=""
+// TODO : Configuration - The ability to configure which rules to turn on and off
+// Maybe provide an xml or yml config file, using rule names
+
 class Checker : CliktCommand() {
 
     // TODO : Remove the default for production
