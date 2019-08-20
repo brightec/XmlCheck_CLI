@@ -38,7 +38,7 @@
                 android:textSize="16sp"/>
 
             <com.trainsplit.trainsplit.widgets.DaabSelectionView
-                android:id="@+id/selection_outbound_daab"
+                android:id="@+id/daab_selection_outbound"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/text_title_outbound"
@@ -194,7 +194,7 @@
                         android:textSize="16sp"/>
 
                     <com.trainsplit.trainsplit.widgets.DaabSelectionView
-                        android:id="@+id/selection_return_daab"
+                        android:id="@+id/daab_selection_return"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignStart="@+id/text_title_return"

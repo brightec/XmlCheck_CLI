@@ -375,7 +375,7 @@
                 app:required="true" />
 
             <com.trainsplit.trainsplit.widgets.UpdateDetailsWidget
-                android:id="@+id/widget_update_details_personal"
+                android:id="@+id/update_details_personal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -447,7 +447,7 @@
                 tools:ignore="RtlSymmetry" />
 
             <com.trainsplit.trainsplit.widgets.UpdateDetailsWidget
-                android:id="@+id/widget_update_details_address"
+                android:id="@+id/update_details_address"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"

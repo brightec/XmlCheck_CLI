@@ -186,7 +186,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/button_feedback_negative" />
 
             <com.trainsplit.trainsplit.journeyplanner.journey.JourneyView
-                android:id="@+id/view_journey"
+                android:id="@+id/journey"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"

@@ -1,6 +1,7 @@
 package uk.co.brightec.xmlcheck.rules.android
 
 import org.w3c.dom.Attr
+import org.w3c.dom.Element
 import uk.co.brightec.xmlcheck.Constants.ATTR_NAMESPACE_ANDROID
 import uk.co.brightec.xmlcheck.Failure
 import uk.co.brightec.xmlcheck.rules.AttrCheck
@@ -17,15 +18,28 @@ class Id : AttrCheck() {
 
         val attrId = attr.value.substringAfter("@+id/")
 
-        val parentTagName = attr.ownerElement.tagName
-        if (!checkIdNamingConvention(attrId, parentTagName)) {
+        if (!checkIdNamingConvention(attrId, attr.ownerElement)) {
+            val parentTagName = attr.ownerElement.tagName
             return failure(attr, "Id for $parentTagName doesn't conform to naming convention")
         }
 
         return null
     }
 
-    // TODO : Finish configuring checkIdNamingConvention()
+    private fun checkIdNamingConvention(attrId: String, ownerElement: Element): Boolean {
+        val parentTagName = ownerElement.tagName
+        val className = parentTagName.split(".").last()
+        if (className == "merge") {
+            if (attrId.startsWith("merge")) return true
+
+            val parentTagAttr = ownerElement.attributes.getNamedItem("tools:parentTag") as Attr
+            val parentTagClassName = parentTagAttr.value.split(".").last()
+            return checkIdNamingConvention(attrId, parentTagClassName)
+        }
+
+        return checkIdNamingConvention(attrId, parentTagName)
+    }
+
     private fun checkIdNamingConvention(attrId: String, parentTagName: String): Boolean {
         val className = parentTagName.split(".").last()
         val words = splitClassIntoWords(className)
@@ -45,7 +59,6 @@ class Id : AttrCheck() {
         if (className == "Guideline" && attrId.startsWith("guide")) {
             return true
         }
-
 
         // General rules
         if (words.contains("Button") && attrId.startsWith("button")) {

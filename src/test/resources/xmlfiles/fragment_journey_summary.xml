@@ -48,7 +48,7 @@
                 </RelativeLayout>
 
                 <com.trainsplit.trainsplit.journeyplanner.journey.JourneyView
-                    android:id="@+id/view_outbound_ticket"
+                    android:id="@+id/journey_outbound"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -97,7 +97,7 @@
                     </RelativeLayout>
 
                     <com.trainsplit.trainsplit.journeyplanner.journey.JourneyView
-                        android:id="@+id/view_return_ticket"
+                        android:id="@+id/journey_return"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"

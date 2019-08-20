@@ -24,7 +24,7 @@
         tools:visibility="visible"/>
 
     <LinearLayout
-        android:id="@+id/layout_chart_key"
+        android:id="@+id/linear_chart_key"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"

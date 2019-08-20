@@ -56,7 +56,7 @@
                 tools:text="3 changes"/>
 
             <com.trainsplit.trainsplit.journeyplanner.journey.JourneyLineView
-                android:id="@+id/view_journey_line"
+                android:id="@+id/journey_line"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_below="@+id/text_changes"
