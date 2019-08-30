@@ -74,7 +74,7 @@ class Id : AttrCheck() {
         if (words.contains("Button") && attrId.startsWith("button")) {
             return true
         }
-        if (attrId.startsWith(words.first().toLowerCase())) {
+        if (attrId.startsWith("${words.first().toLowerCase()}_")) {
             return true
         }
 

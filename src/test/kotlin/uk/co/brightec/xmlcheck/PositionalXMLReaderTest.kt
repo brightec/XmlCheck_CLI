@@ -4,9 +4,11 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import uk.co.brightec.xmlcheck.extension.lineNumber
+import uk.co.brightec.xmlcheck.testutil.Small
 import java.io.ByteArrayInputStream
 
-class PositionalXMLReaderTest {
+@Small
+private class PositionalXMLReaderTest {
 
     private lateinit var reader: PositionalXMLReader
 
