@@ -2,21 +2,12 @@ package uk.co.brightec.xmlcheck.rules.element
 
 import org.w3c.dom.Element
 import uk.co.brightec.xmlcheck.Failure
+import uk.co.brightec.xmlcheck.rules.Check
+import uk.co.brightec.xmlcheck.rules.RuleName
 
-abstract class ElementCheck {
+abstract class ElementCheck : Check<Element>() {
 
-    fun runEnsured(element: Element): Failure<Element>? {
-        return run(element)
+    override fun runEnsured(node: Element, suppressions: List<RuleName>): Failure<Element>? {
+        return run(node, suppressions)
     }
-
-    abstract fun run(element: Element): Failure<Element>?
-
-    protected fun failure(
-        element: Element,
-        errorMessage: String
-    ) = Failure(
-        ruleClass = this::class,
-        node = element,
-        errorMessage = errorMessage
-    )
 }

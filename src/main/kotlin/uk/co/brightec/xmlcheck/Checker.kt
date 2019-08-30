@@ -4,8 +4,10 @@ import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.arguments.argument
 import com.github.ajalt.clikt.parameters.arguments.default
 import org.w3c.dom.*
+import uk.co.brightec.xmlcheck.Constants.ATTR_NAMESPACE_TOOLS
 import uk.co.brightec.xmlcheck.extension.lineNumber
 import uk.co.brightec.xmlcheck.extension.systemId
+import uk.co.brightec.xmlcheck.rules.RuleName
 import uk.co.brightec.xmlcheck.rules.attr.AttrCheck
 import uk.co.brightec.xmlcheck.rules.attr.android.Id
 import uk.co.brightec.xmlcheck.rules.attr.android.TextSize
@@ -20,8 +22,6 @@ import uk.co.brightec.xmlcheck.rules.element.ElementCheck
 import uk.co.brightec.xmlcheck.rules.element.android.ClassName
 import java.io.File
 
-// TODO : Suppression - The ability to suppress a rule for a given element
-// Think about using tools:ignore=""
 // TODO : Configuration - The ability to configure which rules to turn on and off
 // Maybe provide an xml or yml config file, using rule names
 
@@ -90,17 +90,17 @@ class Checker : CliktCommand() {
                     when (val node = it.node) {
                         is Element ->
                             echo(
-                                message = "Line:${node.lineNumber}: ${node.tagName} - ${it.errorMessage}",
+                                message = "(${it.ruleName}) Line:${node.lineNumber}: ${node.tagName} - ${it.errorMessage}",
                                 err = true
                             )
                         is Attr ->
                             echo(
-                                message = "Line:${node.ownerElement.lineNumber}: $node - ${it.errorMessage}",
+                                message = "(${it.ruleName}) Line:${node.ownerElement.lineNumber}: $node - ${it.errorMessage}",
                                 err = true
                             )
                         else ->
                             echo(
-                                message = "$node - ${it.errorMessage}",
+                                message = "(${it.ruleName}) $node - ${it.errorMessage}",
                                 err = true
                             )
                     }
@@ -146,8 +146,10 @@ class Checker : CliktCommand() {
     private fun examineElement(element: Element): List<Failure<*>> {
         val failures = arrayListOf<Failure<*>>()
 
+        val suppressions = determineSuppressions(element)
+
         allElementChecks.forEach { elementCheck ->
-            elementCheck.runEnsured(element)?.let {
+            elementCheck.runEnsured(element, suppressions)?.let {
                 failures.add(it)
             }
         }
@@ -155,7 +157,7 @@ class Checker : CliktCommand() {
         allAttrChecks.forEach { attrCheck ->
             element.attributes?.getNamedItem(attrCheck.attrName)?.let { node ->
                 check(node is Attr)
-                attrCheck.runEnsured(node)?.let {
+                attrCheck.runEnsured(node, suppressions)?.let {
                     failures.add(it)
                 }
             }
@@ -179,5 +181,13 @@ class Checker : CliktCommand() {
         } while (elementNode !is Element && count < 10)
 
         return elementNode.systemId
+    }
+
+    private fun determineSuppressions(element: Element): List<RuleName> {
+        element.attributes?.getNamedItem("$ATTR_NAMESPACE_TOOLS:ignore")?.let { node ->
+            check(node is Attr)
+            return node.value.split(",")
+        }
+        return emptyList()
     }
 }

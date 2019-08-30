@@ -2,26 +2,17 @@ package uk.co.brightec.xmlcheck.rules.attr
 
 import org.w3c.dom.Attr
 import uk.co.brightec.xmlcheck.Failure
+import uk.co.brightec.xmlcheck.rules.Check
+import uk.co.brightec.xmlcheck.rules.RuleName
 
-abstract class AttrCheck {
+abstract class AttrCheck : Check<Attr>() {
 
     abstract val attrName: String
 
-    fun runEnsured(attr: Attr): Failure<Attr>? {
-        if (attr.name != attrName) {
+    override fun runEnsured(node: Attr, suppressions: List<RuleName>): Failure<Attr>? {
+        if (node.name != attrName) {
             return null
         }
-        return run(attr)
+        return run(node, suppressions)
     }
-
-    abstract fun run(attr: Attr): Failure<Attr>?
-
-    protected fun failure(
-        attr: Attr,
-        errorMessage: String
-    ) = Failure(
-        ruleClass = this::class,
-        node = attr,
-        errorMessage = errorMessage
-    )
 }
