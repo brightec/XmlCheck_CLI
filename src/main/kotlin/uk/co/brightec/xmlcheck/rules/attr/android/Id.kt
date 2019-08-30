@@ -18,7 +18,7 @@ class Id : AttrCheck() {
     override val attrName: String
         get() = "$ATTR_NAMESPACE_ANDROID:id"
 
-    override fun run(node: Attr, suppressions: List<RuleName>): Failure<Attr>? {
+    override fun run(node: Attr, suppressions: Collection<RuleName>): Failure<Attr>? {
         if (!suppressions.contains(RULE_ID_PLUS.name) && ruleIdPlus(node)) {
             return RULE_ID_PLUS.failure(node)
         }

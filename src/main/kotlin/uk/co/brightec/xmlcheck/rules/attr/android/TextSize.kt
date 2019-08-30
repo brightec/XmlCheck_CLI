@@ -16,7 +16,7 @@ class TextSize : AttrCheck() {
     override val attrName: String
         get() = "$ATTR_NAMESPACE_ANDROID:textSize"
 
-    override fun run(node: Attr, suppressions: List<RuleName>): Failure<Attr>? {
+    override fun run(node: Attr, suppressions: Collection<RuleName>): Failure<Attr>? {
         if (!suppressions.contains(RULE_TEXT_SIZE_UNIT.name) && ruleTextSizeUnit(node)) {
             return RULE_TEXT_SIZE_UNIT.failure(node)
         }

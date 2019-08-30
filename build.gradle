@@ -39,7 +39,15 @@ tasks.test {
 task runMain(type: Exec) {
     executable "$buildDir/install/xmlcheck/bin/xmlcheck"
     args = [
-            "./src/test/resources/xmlfiles"
+            "./src/test/resources/xmlfiles",
+            "./src/test/resources/xmlfiles2"
+    ]
+}
+
+task runMainHelp(type: Exec) {
+    executable "$buildDir/install/xmlcheck/bin/xmlcheck"
+    args = [
+            "--help"
     ]
 }
 
@@ -47,4 +55,10 @@ task installAndRun {
     dependsOn installDist
     dependsOn runMain
     runMain.mustRunAfter installDist
+}
+
+task installAndHelp {
+    dependsOn installDist
+    dependsOn runMainHelp
+    runMainHelp.mustRunAfter installDist
 }

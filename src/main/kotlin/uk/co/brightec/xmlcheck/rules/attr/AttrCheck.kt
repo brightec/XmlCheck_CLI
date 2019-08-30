@@ -9,7 +9,7 @@ abstract class AttrCheck : Check<Attr>() {
 
     abstract val attrName: String
 
-    override fun runEnsured(node: Attr, suppressions: List<RuleName>): Failure<Attr>? {
+    override fun runEnsured(node: Attr, suppressions: Collection<RuleName>): Failure<Attr>? {
         if (node.name != attrName) {
             return null
         }

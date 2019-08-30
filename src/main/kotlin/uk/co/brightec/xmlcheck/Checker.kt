@@ -2,7 +2,11 @@ package uk.co.brightec.xmlcheck
 
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.arguments.argument
-import com.github.ajalt.clikt.parameters.arguments.default
+import com.github.ajalt.clikt.parameters.arguments.multiple
+import com.github.ajalt.clikt.parameters.options.default
+import com.github.ajalt.clikt.parameters.options.option
+import com.github.ajalt.clikt.parameters.options.split
+import com.github.ajalt.clikt.parameters.types.file
 import org.w3c.dom.*
 import uk.co.brightec.xmlcheck.Constants.ATTR_NAMESPACE_TOOLS
 import uk.co.brightec.xmlcheck.extension.lineNumber
@@ -22,16 +26,22 @@ import uk.co.brightec.xmlcheck.rules.element.ElementCheck
 import uk.co.brightec.xmlcheck.rules.element.android.ClassName
 import java.io.File
 
-// TODO : Configuration - The ability to configure which rules to turn on and off
-// Maybe provide an xml or yml config file, using rule names
-
 class Checker : CliktCommand() {
 
-    // TODO : Remove the default for production
-    private val path by argument(
-        name = "path",
-        help = "The path to your xml dir"
-    ).default("./src/test/resources/xmlfiles")
+    private val paths by argument(
+        name = "paths",
+        help = "The paths to your xml directories"
+    ).file(
+        exists = true,
+        fileOkay = false,
+        folderOkay = true,
+        writable = false,
+        readable = true
+    ).multiple()
+    private val excludes: List<RuleName> by option(
+        "-x", "--exclude",
+        help = "The rules you want to exclude (e.g. xmlcheck -x Rule1,Rule2)"
+    ).split(",").default(emptyList())
 
     private val colorAttrChecks: List<AttrCheck> = listOf(
         TextColor(), Tint()
@@ -40,6 +50,7 @@ class Checker : CliktCommand() {
         LayoutConstraintStartToStartOf(), LayoutConstraintStartToEndOf(),
         LayoutConstraintEndToStartOf(), LayoutConstraintEndToEndOf(),
         LayoutConstraintTopToTopOf(), LayoutConstraintTopToBottomOf(),
+
         LayoutConstraintBottomToTopOf(), LayoutConstraintBottomToBottomOf()
     )
     private val marginAttrChecks: List<AttrCheck> = listOf(
@@ -61,15 +72,17 @@ class Checker : CliktCommand() {
     override fun run() {
         echo(message = "XmlChecks RUNNING")
 
-        val files = File(path)
-        check(files.isDirectory) {
-            "Must supply a directory"
-        }
-        check(!files.listFiles().isNullOrEmpty()) {
-            "No files in directory"
+        val files = arrayListOf<File>()
+        paths.forEach { dir ->
+            val dirFiles = dir.listFiles()
+            if (dirFiles.isNullOrEmpty()) {
+                echo(message = "Empty dir: $dir")
+            } else {
+                files.addAll(dirFiles)
+            }
         }
         val failures = arrayListOf<Failure<*>>()
-        for (file in files.listFiles()!!) {
+        for (file in files) {
             val doc = getXmlDoc(file)
             if (doc == null) {
                 echo(message = "Not an XML file - ${file.path}")
@@ -146,7 +159,7 @@ class Checker : CliktCommand() {
     private fun examineElement(element: Element): List<Failure<*>> {
         val failures = arrayListOf<Failure<*>>()
 
-        val suppressions = determineSuppressions(element)
+        val suppressions = determineSuppressions(element).union(excludes)
 
         allElementChecks.forEach { elementCheck ->
             elementCheck.runEnsured(element, suppressions)?.let {

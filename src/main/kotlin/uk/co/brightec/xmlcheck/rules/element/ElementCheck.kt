@@ -7,7 +7,7 @@ import uk.co.brightec.xmlcheck.rules.RuleName
 
 abstract class ElementCheck : Check<Element>() {
 
-    override fun runEnsured(node: Element, suppressions: List<RuleName>): Failure<Element>? {
+    override fun runEnsured(node: Element, suppressions: Collection<RuleName>): Failure<Element>? {
         return run(node, suppressions)
     }
 }

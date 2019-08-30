@@ -13,7 +13,7 @@ abstract class Color : AttrCheck() {
             RULE_COLOR_RES
         )
 
-    override fun run(node: Attr, suppressions: List<RuleName>): Failure<Attr>? {
+    override fun run(node: Attr, suppressions: Collection<RuleName>): Failure<Attr>? {
         if (!suppressions.contains(RULE_COLOR_RES.name) && ruleColorRes(node)) {
             return RULE_COLOR_RES.failure(node)
         }

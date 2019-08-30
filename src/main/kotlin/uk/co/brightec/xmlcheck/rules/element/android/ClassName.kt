@@ -13,7 +13,7 @@ class ClassName : ElementCheck() {
             RULE_CLASS_MATERIAL_BUTTON
         )
 
-    override fun run(node: Element, suppressions: List<RuleName>): Failure<Element>? {
+    override fun run(node: Element, suppressions: Collection<RuleName>): Failure<Element>? {
         if (!suppressions.contains(RULE_CLASS_MATERIAL_BUTTON.name) && ruleClassMaterialButton(node)) {
             return RULE_CLASS_MATERIAL_BUTTON.failure(node)
         }
