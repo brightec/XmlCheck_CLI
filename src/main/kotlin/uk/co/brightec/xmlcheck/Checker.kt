@@ -26,6 +26,8 @@ import uk.co.brightec.xmlcheck.rules.element.ElementCheck
 import uk.co.brightec.xmlcheck.rules.element.android.ClassName
 import java.io.File
 
+// TODO : Add units test
+
 class Checker : CliktCommand() {
 
     private val paths by argument(
