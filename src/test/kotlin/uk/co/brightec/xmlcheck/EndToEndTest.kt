@@ -1,10 +1,12 @@
 package uk.co.brightec.xmlcheck
 
 import org.junit.jupiter.api.AfterEach
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import uk.co.brightec.xmlcheck.testutil.Assertions.assertContains
 import uk.co.brightec.xmlcheck.testutil.Large
 import java.io.ByteArrayOutputStream
 import java.io.PrintStream
@@ -522,11 +524,5 @@ private class EndToEndTest {
         assertContains(expectedLog2, outputOut)
         val outputErr = errContent.toString()
         assertEquals("", outputErr)
-    }
-
-    private fun assertContains(expected: String, str: String) {
-        assertTrue(str.contains(expected)) {
-            "String does not contain expected:\n\nString:\n$str\n\nEXPECTED:\n$expected"
-        }
     }
 }

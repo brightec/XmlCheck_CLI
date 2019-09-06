@@ -164,7 +164,7 @@ class Checker : CliktCommand() {
         val suppressions = determineSuppressions(element).union(excludes)
 
         allElementChecks.forEach { elementCheck ->
-            elementCheck.runEnsured(element, suppressions)?.let {
+            elementCheck.check(element, suppressions)?.let {
                 failures.add(it)
             }
         }
@@ -172,7 +172,7 @@ class Checker : CliktCommand() {
         allAttrChecks.forEach { attrCheck ->
             element.attributes?.getNamedItem(attrCheck.attrName)?.let { node ->
                 check(node is Attr)
-                attrCheck.runEnsured(node, suppressions)?.let {
+                attrCheck.check(node, suppressions)?.let {
                     failures.add(it)
                 }
             }

@@ -18,7 +18,7 @@ class Id : AttrCheck() {
     override val attrName: String
         get() = "$ATTR_NAMESPACE_ANDROID:id"
 
-    override fun run(node: Attr, suppressions: Collection<RuleName>): Failure<Attr>? {
+    override fun runCheck(node: Attr, suppressions: Collection<RuleName>): Failure<Attr>? {
         if (!suppressions.contains(RULE_ID_PLUS.name) && ruleIdPlus(node)) {
             return RULE_ID_PLUS.failure(node)
         }
@@ -59,20 +59,20 @@ class Id : AttrCheck() {
             return true
         }
 
-        // Specific exception
-        if (className == "HorizontalScrollView" && attrId.startsWith("scroll")) {
-            return true
+        // Specific exceptions
+        if (className == "HorizontalScrollView") {
+            return attrId.startsWith("scroll_")
         }
-        if (className == "GifImageView" && attrId.startsWith("image")) {
-            return true
+        if (className == "GifImageView") {
+            return attrId.startsWith("image_")
         }
-        if (className == "Guideline" && attrId.startsWith("guide")) {
-            return true
+        if (className == "Guideline") {
+            return attrId.startsWith("guide_")
         }
 
         // General rules
-        if (words.contains("Button") && attrId.startsWith("button")) {
-            return true
+        if (words.contains("Button")) {
+            return attrId.startsWith("button_")
         }
         if (attrId.startsWith("${words.first().toLowerCase()}_")) {
             return true

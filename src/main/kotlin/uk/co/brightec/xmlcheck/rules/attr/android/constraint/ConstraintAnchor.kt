@@ -13,7 +13,7 @@ abstract class ConstraintAnchor : AttrCheck() {
             RULE_CONSTRAINT_ID_PLUS
         )
 
-    override fun run(node: Attr, suppressions: Collection<RuleName>): Failure<Attr>? {
+    override fun runCheck(node: Attr, suppressions: Collection<RuleName>): Failure<Attr>? {
         if (!suppressions.contains(RULE_CONSTRAINT_ID_PLUS.name) && ruleConstraintIdPlus(node)) {
             return RULE_CONSTRAINT_ID_PLUS.failure(node)
         }

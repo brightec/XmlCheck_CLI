@@ -13,7 +13,7 @@ abstract class Margin : AttrCheck() {
             RULE_MARGIN_2S
         )
 
-    override fun run(node: Attr, suppressions: Collection<RuleName>): Failure<Attr>? {
+    override fun runCheck(node: Attr, suppressions: Collection<RuleName>): Failure<Attr>? {
         if (!suppressions.contains(RULE_MARGIN_2S.name) && ruleMargin2s(node)) {
             return RULE_MARGIN_2S.failure(node)
         }
