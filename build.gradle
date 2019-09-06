@@ -5,13 +5,10 @@ plugins {
 
 group 'uk.co.brightec'
 version '1.0.0'
+mainClassName = 'uk.co.brightec.xmlcheck.MainKt'
 
 repositories {
     mavenCentral()
-}
-
-application {
-    mainClassName = 'uk.co.brightec.xmlcheck.MainKt'
 }
 
 dependencies {
@@ -37,28 +34,39 @@ test {
     }
 }
 
-task runMain(type: Exec) {
+task runMain(type: Exec, group: 'run') {
     executable "$buildDir/install/xmlcheck/bin/xmlcheck"
     args = [
             "./src/test/resources/files/cases"
     ]
 }
 
-task runMainHelp(type: Exec) {
+task runMainHelp(type: Exec, group: 'run') {
     executable "$buildDir/install/xmlcheck/bin/xmlcheck"
     args = [
             "--help"
     ]
 }
 
-task installAndRun {
+task installAndRun(group: 'run') {
     dependsOn installDist
     dependsOn runMain
     runMain.mustRunAfter installDist
 }
 
-task installAndHelp {
+task installAndHelp(group: 'run') {
     dependsOn installDist
     dependsOn runMainHelp
     runMainHelp.mustRunAfter installDist
+}
+
+task distJar(type: Jar, group: 'distribution') {
+    destinationDirectory = new File('build/distributions')
+
+    from sourceSets.main.output
+
+    dependsOn configurations.runtimeClasspath
+    from {
+        configurations.runtimeClasspath.findAll { it.name.endsWith('jar') }.collect { zipTree(it) }
+    }
 }
