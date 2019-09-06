@@ -16,7 +16,7 @@ import javax.xml.parsers.ParserConfigurationException
 import javax.xml.parsers.SAXParser
 import javax.xml.parsers.SAXParserFactory
 
-class PositionalXMLReader(
+internal class PositionalXMLReader(
     private val saxParserFactory: SAXParserFactory = SAXParserFactory.newInstance(),
     private val docBuilderFactory: DocumentBuilderFactory = DocumentBuilderFactory.newInstance()
 ) {

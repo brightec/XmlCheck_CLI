@@ -195,6 +195,35 @@ private class IdTest {
 
     @ParameterizedTest
     @MethodSource("createArgumentsHorizontalScrollView")
+    fun `Given tagName HorizontalScrollView and naming exact correct | When run check | Then no failure`(
+        tagName: String,
+        parentTagName: String?
+    ) {
+        // GIVEN
+        val parentTagAttr = mockk<Attr> {
+            every { value } returns parentTagName
+        }
+        val owner = mockk<Element> {
+            every { this@mockk.tagName } returns tagName
+            every {
+                attributes.getNamedItem("${Constants.ATTR_NAMESPACE_TOOLS}:parentTag")
+            } returns parentTagAttr
+        }
+        val node = mockk<Attr> {
+            every { name } returns check.attrName
+            every { value } returns "@+id/scroll"
+            every { ownerElement } returns owner
+        }
+
+        // WHEN
+        val result = check.check(node, emptyList())
+
+        // THEN
+        assertNull(result)
+    }
+
+    @ParameterizedTest
+    @MethodSource("createArgumentsHorizontalScrollView")
     fun `Given tagName HorizontalScrollView and naming correct | When run check | Then no failure`(
         tagName: String,
         parentTagName: String?
@@ -280,6 +309,35 @@ private class IdTest {
         // THEN
         val expected = RULE_ID_NAMING.failure(node, "Id for ${owner.tagName} doesn't conform to naming convention")
         assertEquals(expected, result)
+    }
+
+    @ParameterizedTest
+    @MethodSource("createArgumentsGifImageView")
+    fun `Given tagName GifImageView and naming exact correct | When run check | Then no failure`(
+        tagName: String,
+        parentTagName: String?
+    ) {
+        // GIVEN
+        val parentTagAttr = mockk<Attr> {
+            every { value } returns parentTagName
+        }
+        val owner = mockk<Element> {
+            every { this@mockk.tagName } returns tagName
+            every {
+                attributes.getNamedItem("${Constants.ATTR_NAMESPACE_TOOLS}:parentTag")
+            } returns parentTagAttr
+        }
+        val node = mockk<Attr> {
+            every { name } returns check.attrName
+            every { value } returns "@+id/image"
+            every { ownerElement } returns owner
+        }
+
+        // WHEN
+        val result = check.check(node, emptyList())
+
+        // THEN
+        assertNull(result)
     }
 
     @ParameterizedTest
@@ -373,6 +431,35 @@ private class IdTest {
 
     @ParameterizedTest
     @MethodSource("createArgumentsGuideline")
+    fun `Given tagName Guideline and naming exact correct | When run check | Then no failure`(
+        tagName: String,
+        parentTagName: String?
+    ) {
+        // GIVEN
+        val parentTagAttr = mockk<Attr> {
+            every { value } returns parentTagName
+        }
+        val owner = mockk<Element> {
+            every { this@mockk.tagName } returns tagName
+            every {
+                attributes.getNamedItem("${Constants.ATTR_NAMESPACE_TOOLS}:parentTag")
+            } returns parentTagAttr
+        }
+        val node = mockk<Attr> {
+            every { name } returns check.attrName
+            every { value } returns "@+id/guide"
+            every { ownerElement } returns owner
+        }
+
+        // WHEN
+        val result = check.check(node, emptyList())
+
+        // THEN
+        assertNull(result)
+    }
+
+    @ParameterizedTest
+    @MethodSource("createArgumentsGuideline")
     fun `Given tagName Guideline and naming correct | When run check | Then no failure`(
         tagName: String,
         parentTagName: String?
@@ -462,6 +549,35 @@ private class IdTest {
 
     @ParameterizedTest
     @MethodSource("createArgumentsSomeButton")
+    fun `Given tagName SomeButton and naming exact correct | When run check | Then no failure`(
+        tagName: String,
+        parentTagName: String?
+    ) {
+        // GIVEN
+        val parentTagAttr = mockk<Attr> {
+            every { value } returns parentTagName
+        }
+        val owner = mockk<Element> {
+            every { this@mockk.tagName } returns tagName
+            every {
+                attributes.getNamedItem("${Constants.ATTR_NAMESPACE_TOOLS}:parentTag")
+            } returns parentTagAttr
+        }
+        val node = mockk<Attr> {
+            every { name } returns check.attrName
+            every { value } returns "@+id/button"
+            every { ownerElement } returns owner
+        }
+
+        // WHEN
+        val result = check.check(node, emptyList())
+
+        // THEN
+        assertNull(result)
+    }
+
+    @ParameterizedTest
+    @MethodSource("createArgumentsSomeButton")
     fun `Given tagName SomeButton and naming correct | When run check | Then no failure`(
         tagName: String,
         parentTagName: String?
@@ -517,6 +633,35 @@ private class IdTest {
         // THEN
         val expected = RULE_ID_NAMING.failure(node, "Id for ${owner.tagName} doesn't conform to naming convention")
         assertEquals(expected, result)
+    }
+
+    @ParameterizedTest
+    @MethodSource("createArgumentsSomeCustom")
+    fun `Given tagName SomeCustom and naming exact correct | When run check | Then no failure`(
+        tagName: String,
+        parentTagName: String?
+    ) {
+        // GIVEN
+        val parentTagAttr = mockk<Attr> {
+            every { value } returns parentTagName
+        }
+        val owner = mockk<Element> {
+            every { this@mockk.tagName } returns tagName
+            every {
+                attributes.getNamedItem("${Constants.ATTR_NAMESPACE_TOOLS}:parentTag")
+            } returns parentTagAttr
+        }
+        val node = mockk<Attr> {
+            every { name } returns check.attrName
+            every { value } returns "@+id/some"
+            every { ownerElement } returns owner
+        }
+
+        // WHEN
+        val result = check.check(node, emptyList())
+
+        // THEN
+        assertNull(result)
     }
 
     @ParameterizedTest

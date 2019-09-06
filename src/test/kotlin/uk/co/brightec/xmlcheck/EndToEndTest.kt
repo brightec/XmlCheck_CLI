@@ -37,9 +37,9 @@ private class EndToEndTest {
     }
 
     @Test
-    fun `Given Case1 | When run checker | Then logs running and passed`() {
+    fun `Given case1 | When run checker | Then logs running and passed`() {
         // GIVEN
-        val path = "./src/test/resources/files/cases/Case1"
+        val path = "./src/test/resources/files/cases/case1"
 
         // WHEN
         main(

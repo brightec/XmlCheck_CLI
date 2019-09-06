@@ -40,8 +40,7 @@ test {
 task runMain(type: Exec) {
     executable "$buildDir/install/xmlcheck/bin/xmlcheck"
     args = [
-            "./src/test/resources/xmlfiles",
-            "./src/test/resources/xmlfiles2"
+            "./src/test/resources/files/cases"
     ]
 }
 

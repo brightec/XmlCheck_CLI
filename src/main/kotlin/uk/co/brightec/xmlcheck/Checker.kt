@@ -26,9 +26,7 @@ import uk.co.brightec.xmlcheck.rules.element.ElementCheck
 import uk.co.brightec.xmlcheck.rules.element.android.ClassName
 import java.io.File
 
-// TODO : Add units test
-
-class Checker : CliktCommand() {
+internal class Checker : CliktCommand() {
 
     private val paths by argument(
         name = "paths",
@@ -76,13 +74,16 @@ class Checker : CliktCommand() {
 
         val files = arrayListOf<File>()
         paths.forEach { dir ->
-            val dirFiles = dir.listFiles()
-            if (dirFiles.isNullOrEmpty()) {
+            if (dir.listFiles().isNullOrEmpty()) {
                 echo(message = "Empty dir: $dir")
             } else {
-                files.addAll(dirFiles)
+                files.addAll(dir.walk().maxDepth(MAX_DIR_DEPTH).filter { it.isFile }.toList())
             }
         }
+        check(files.isNotEmpty()) {
+            "XmlChecks FAILED - No xml files to check"
+        }
+
         val failures = arrayListOf<Failure<*>>()
         for (file in files) {
             val doc = getXmlDoc(file)
@@ -204,5 +205,10 @@ class Checker : CliktCommand() {
             return node.value.split(",")
         }
         return emptyList()
+    }
+
+    companion object {
+
+        const val MAX_DIR_DEPTH = 10 // For efficiencies sake
     }
 }

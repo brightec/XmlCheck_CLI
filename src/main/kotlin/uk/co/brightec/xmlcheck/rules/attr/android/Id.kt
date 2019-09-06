@@ -61,20 +61,21 @@ class Id : AttrCheck() {
 
         // Specific exceptions
         if (className == "HorizontalScrollView") {
-            return attrId.startsWith("scroll_")
+            return attrId == "scroll" || attrId.startsWith("scroll_")
         }
         if (className == "GifImageView") {
-            return attrId.startsWith("image_")
+            return attrId == "image" || attrId.startsWith("image_")
         }
         if (className == "Guideline") {
-            return attrId.startsWith("guide_")
+            return attrId == "guide" || attrId.startsWith("guide_")
         }
 
         // General rules
         if (words.contains("Button")) {
-            return attrId.startsWith("button_")
+            return attrId == "button" || attrId.startsWith("button_")
         }
-        if (attrId.startsWith("${words.first().toLowerCase()}_")) {
+        val firstWordLower = words.first().toLowerCase()
+        if (attrId == firstWordLower || attrId.startsWith("${firstWordLower}_")) {
             return true
         }
 
