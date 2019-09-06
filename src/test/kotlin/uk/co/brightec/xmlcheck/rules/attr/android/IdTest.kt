@@ -30,13 +30,13 @@ private class IdTest {
     @Test
     fun `Given IdPlus,IdNaming suppressed | When run check | Then no failure`() {
         // GIVEN
-        val supressions = listOf("IdPlus", "IdNaming")
+        val suppressions = listOf("IdPlus", "IdNaming")
         val node = mockk<Attr> {
             every { name } returns check.attrName
         }
 
         // WHEN
-        val result = check.check(node, supressions)
+        val result = check.check(node, suppressions)
 
         // THEN
         assertNull(result)
@@ -45,14 +45,14 @@ private class IdTest {
     @Test
     fun `Given value @id | When run check | Then failure`() {
         // GIVEN
-        val supressions = listOf("IdNaming")
+        val suppressions = listOf("IdNaming")
         val node = mockk<Attr> {
             every { name } returns check.attrName
             every { value } returns "@id/"
         }
 
         // WHEN
-        val result = check.check(node, supressions)
+        val result = check.check(node, suppressions)
 
         // THEN
         val expected = RULE_ID_PLUS.failure(node)
@@ -62,14 +62,14 @@ private class IdTest {
     @Test
     fun `Given value @+id | When run check | Then no failure`() {
         // GIVEN
-        val supressions = listOf("IdNaming")
+        val suppressions = listOf("IdNaming")
         val node = mockk<Attr> {
             every { name } returns check.attrName
             every { value } returns "@+id/"
         }
 
         // WHEN
-        val result = check.check(node, supressions)
+        val result = check.check(node, suppressions)
 
         // THEN
         assertNull(result)

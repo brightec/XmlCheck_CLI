@@ -25,7 +25,7 @@ private class LayoutMarginTopTest {
     @Test
     fun `Given Margin2s suppressed | When run check | Then no failure`() {
         // GIVEN
-        val supressions = listOf(
+        val suppressions = listOf(
             "Margin2s"
         )
         val node = mockk<Attr> {
@@ -33,7 +33,7 @@ private class LayoutMarginTopTest {
         }
 
         // WHEN
-        val result = check.check(node, supressions)
+        val result = check.check(node, suppressions)
 
         // THEN
         assertNull(result)

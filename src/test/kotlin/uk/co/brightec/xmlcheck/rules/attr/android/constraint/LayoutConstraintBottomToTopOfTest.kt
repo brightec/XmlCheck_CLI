@@ -1,4 +1,4 @@
-package uk.co.brightec.xmlcheck.rules.attr.android
+package uk.co.brightec.xmlcheck.rules.attr.android.constraint
 
 import io.mockk.every
 import io.mockk.mockk
@@ -7,25 +7,23 @@ import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.w3c.dom.Attr
-import uk.co.brightec.xmlcheck.rules.attr.android.TextSize.Companion.RULE_TEXT_SIZE_UNIT
+import uk.co.brightec.xmlcheck.rules.attr.android.constraint.ConstraintAnchor.Companion.RULE_CONSTRAINT_ID_PLUS
 import uk.co.brightec.xmlcheck.testutil.Small
 
 @Small
-private class TextSizeTest {
+private class LayoutConstraintBottomToTopOfTest {
 
-    private lateinit var check: TextSize
+    private lateinit var check: LayoutConstraintBottomToTopOf
 
     @BeforeEach
     fun beforeEach() {
-        check = TextSize()
+        check = LayoutConstraintBottomToTopOf()
     }
 
     @Test
-    fun `Given TextSizeUnit suppressed | When run check | Then no failure`() {
+    fun `Given ConstraintIdPlus suppressed | When run check | Then no failure`() {
         // GIVEN
-        val suppressions = listOf(
-            "TextSizeUnit"
-        )
+        val suppressions = listOf("ConstraintIdPlus")
         val node = mockk<Attr> {
             every { name } returns check.attrName
         }
@@ -38,27 +36,27 @@ private class TextSizeTest {
     }
 
     @Test
-    fun `Given value dp | When run check | Then failure`() {
+    fun `Given value @id | When run check | Then failure`() {
         // GIVEN
         val node = mockk<Attr> {
             every { name } returns check.attrName
-            every { value } returns "12dp"
+            every { value } returns "@id/"
         }
 
         // WHEN
         val result = check.check(node, emptyList())
 
         // THEN
-        val expected = RULE_TEXT_SIZE_UNIT.failure(node)
+        val expected = RULE_CONSTRAINT_ID_PLUS.failure(node)
         assertEquals(expected, result)
     }
 
     @Test
-    fun `Given value sp | When run check | Then no failure`() {
+    fun `Given value @+id | When run check | Then no failure`() {
         // GIVEN
         val node = mockk<Attr> {
             every { name } returns check.attrName
-            every { value } returns "12sp"
+            every { value } returns "@+id/"
         }
 
         // WHEN

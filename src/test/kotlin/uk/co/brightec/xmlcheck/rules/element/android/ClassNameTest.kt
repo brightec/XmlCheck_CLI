@@ -23,13 +23,13 @@ private class ClassNameTest {
     @Test
     fun `Given ClassMaterialButton suppressed | When run check | Then no failure`() {
         // GIVEN
-        val supressions = listOf(
+        val suppressions = listOf(
             "ClassMaterialButton"
         )
         val node = mockk<Element>()
 
         // WHEN
-        val result = check.check(node, supressions)
+        val result = check.check(node, suppressions)
 
         // THEN
         assertNull(result)
