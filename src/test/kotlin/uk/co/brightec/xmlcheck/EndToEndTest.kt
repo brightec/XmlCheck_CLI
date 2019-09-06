@@ -65,6 +65,37 @@ private class EndToEndTest {
     }
 
     @Test
+    fun `Given case2 | When run checker | Then logs running and failures`() {
+        // GIVEN
+        val path = "./src/test/resources/files/cases/case2"
+
+        // WHEN
+        val result = assertThrows<IllegalStateException> {
+            main(
+                arrayOf(
+                    path
+                )
+            )
+        }
+
+        // THEN
+        assertNotNull(result)
+        val outputOut = outContent.toString()
+        val outputErr = errContent.toString()
+        val expectedLog1 = """
+            XmlChecks RUNNING
+            """.trimIndent()
+        assertContains(expectedLog1, outputOut)
+        val expectedLog2 = """
+            ./src/test/resources/files/cases/case2/case2.xml
+            (IdNaming) Line:62: android:id="@+id/textinput_from" - Id for com.trainsplit.trainsplit.widgets.TextInputWidget doesn't conform to naming convention
+            (IdNaming) Line:91: android:id="@+id/textinput_to" - Id for com.trainsplit.trainsplit.widgets.TextInputWidget doesn't conform to naming convention
+            (ClassMaterialButton) Line:119: Button - Should use MaterialButton
+            """.trimIndent()
+        assertContains(expectedLog2, outputErr)
+    }
+
+    @Test
     fun `Given TextSizeUnit failure | When run checker | Then fails with log`() {
         // GIVEN
         val path = "./src/test/resources/files/failures/TextSizeUnit"
