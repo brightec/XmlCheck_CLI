@@ -1,3 +1,7 @@
+<div align="center">
+  <img width="100" src="https://github.com/brightec/XmlCheck_CLI/blob/master/Logo.png">
+</div>
+
 # XmlCheck_CLI
 
 This CLI tool is designed to help Android developer produce the best XML layouts they can. This CLI tool runs a variety of checks against the given files to ensure certain styles are adhered to.
