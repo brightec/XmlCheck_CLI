@@ -35,12 +35,12 @@ internal class Checker : CliktCommand() {
     ).file().multiple()
     private val excludes: List<RuleName> by option(
         "-x", "--exclude",
-        help = "The rules you want to exclude (e.g. xmlcheck -x Rule1,Rule2)"
+        help = "The rules you want to exclude (e.g. `xmlcheck ./src/main/res/layout -x Rule1,Rule2`)"
     ).split(",").default(emptyList())
     private val failOnEmpty: Boolean by option(
         "--fail-on-empty",
         help = "Whether or not you want the checks to fail if you provide and empty or non-existent path " +
-                "(e.g. xmlcheck -p false)"
+                "(e.g. `xmlcheck ./src/main/res/layout --fail-on-empty`)"
     ).flag("--no-fail-on-empty", default = true)
 
     private val colorAttrChecks: List<AttrCheck> = listOf(
