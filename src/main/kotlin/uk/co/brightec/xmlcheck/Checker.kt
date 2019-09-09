@@ -35,7 +35,7 @@ internal class Checker : CliktCommand() {
     ).file().multiple()
     private val excludes: List<RuleName> by option(
         "-x", "--exclude",
-        help = "The rules you want to exclude (e.g. `xmlcheck ./src/main/res/layout -x Rule1,Rule2`)"
+        help = "The rules you want to exclude (e.g. `xmlcheck ./src/main/res/layout --exclude Rule1,Rule2`)"
     ).split(",").default(emptyList())
     private val failOnEmpty: Boolean by option(
         "--fail-on-empty",
