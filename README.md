@@ -12,7 +12,8 @@ You must specifiy the path you wish to run the checks on:
 
 ## Options
 
-- `-x` `--exclude` - The rules you want to exclude (e.g. `xmlcheck ./src/main/res/layout -x Rule1,Rule2`).
+- `-h` `--help` - Show help (e.g. `xmlcheck --help`).
+- `-x` `--exclude` - The rules you want to exclude (e.g. `xmlcheck ./src/main/res/layout --exclude Rule1,Rule2`).
 - `--fail-on-empty` or `--no-fail-on-empty` - Whether or not you want the checks to fail if you provide and empty or non-existent path (e.g. `xmlcheck ./src/main/res/layout --fail-on-empty`). Defaults to true.
 
 ## Rules
