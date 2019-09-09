@@ -4,6 +4,7 @@ import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.arguments.argument
 import com.github.ajalt.clikt.parameters.arguments.multiple
 import com.github.ajalt.clikt.parameters.options.default
+import com.github.ajalt.clikt.parameters.options.flag
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.split
 import com.github.ajalt.clikt.parameters.types.file
@@ -31,17 +32,16 @@ internal class Checker : CliktCommand() {
     private val paths by argument(
         name = "paths",
         help = "The paths to your xml directories"
-    ).file(
-        exists = true,
-        fileOkay = false,
-        folderOkay = true,
-        writable = false,
-        readable = true
-    ).multiple()
+    ).file().multiple()
     private val excludes: List<RuleName> by option(
         "-x", "--exclude",
         help = "The rules you want to exclude (e.g. xmlcheck -x Rule1,Rule2)"
     ).split(",").default(emptyList())
+    private val failOnEmpty: Boolean by option(
+        "--fail-on-empty",
+        help = "Whether or not you want the checks to fail if you provide and empty or non-existent path " +
+                "(e.g. xmlcheck -p false)"
+    ).flag("--no-fail-on-empty", default = true)
 
     private val colorAttrChecks: List<AttrCheck> = listOf(
         TextColor(), Tint()
@@ -74,14 +74,38 @@ internal class Checker : CliktCommand() {
 
         val files = arrayListOf<File>()
         paths.forEach { dir ->
-            if (dir.listFiles().isNullOrEmpty()) {
-                echo(message = "Empty dir: $dir")
+            if (!dir.exists()) {
+                if (failOnEmpty) {
+                    error(message = "XmlChecks FAILED - Dir does not exist: $dir")
+                } else {
+                    echo(message = "Dir does not exist: $dir")
+                }
+            } else if (!dir.isDirectory) {
+                if (failOnEmpty) {
+                    error(message = "XmlChecks FAILED - Path is not a directory: $dir")
+                } else {
+                    echo(message = "Path is not a directory: $dir")
+                }
+            } else if (dir.listFiles().isNullOrEmpty()) {
+                if (failOnEmpty) {
+                    error(message = "XmlChecks FAILED - Empty dir: $dir")
+                } else {
+                    echo(message = "Empty dir: $dir")
+                }
+            } else if (!dir.canRead()) {
+                error(message = "XmlChecks FAILED - Dir is not readable: $dir")
             } else {
                 files.addAll(dir.walk().maxDepth(MAX_DIR_DEPTH).filter { it.isFile }.toList())
             }
         }
-        check(files.isNotEmpty()) {
-            "XmlChecks FAILED - No xml files to check"
+        if (files.isEmpty()) {
+            if (failOnEmpty) {
+                error(message = "XmlChecks FAILED - No xml files to check")
+            } else {
+                echo(message = "No xml files to check")
+                echo(message = "XmlChecks PASSED")
+                return
+            }
         }
 
         val failures = arrayListOf<Failure<*>>()
