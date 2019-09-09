@@ -69,6 +69,9 @@ class Id : AttrCheck() {
         if (className == "Guideline") {
             return attrId == "guide" || attrId.startsWith("guide_")
         }
+        if (className == "RadioButton") {
+            return attrId == "radio" || attrId.startsWith("radio_")
+        }
 
         // General rules
         if (words.contains("Button")) {
