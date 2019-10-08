@@ -77,6 +77,9 @@ class Id : AttrCheck() {
         if (words.contains("Button")) {
             return attrId == "button" || attrId.startsWith("button_")
         }
+        if (words.contains("Card")) {
+            return attrId == "card" || attrId.startsWith("card_")
+        }
         val firstWordLower = words.first().toLowerCase()
         if (attrId == firstWordLower || attrId.startsWith("${firstWordLower}_")) {
             return true
