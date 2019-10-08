@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'uk.co.brightec'
-version '1.0.0'
+version '1.0.1'
 mainClassName = 'uk.co.brightec.xmlcheck.MainKt'
 
 repositories {
