@@ -4,7 +4,7 @@
 
 # XmlCheck_CLI
 
-This CLI tool is designed to help Android developer produce the best XML layouts they can. This CLI tool runs a variety of checks against the given files to ensure certain styles are adhered to.
+This CLI tool is designed to help Android developers produce the best XML layouts they can. This CLI tool runs a variety of checks against the given files to ensure certain styles are adhered to.
 
 ## Usage
 
@@ -18,7 +18,7 @@ You must specifiy the path you wish to run the checks on:
 
 - `-h` `--help` - Show help (e.g. `xmlcheck --help`).
 - `-x` `--exclude` - The rules you want to exclude (e.g. `xmlcheck ./src/main/res/layout --exclude Rule1,Rule2`).
-- `--fail-on-empty` or `--no-fail-on-empty` - Whether or not you want the checks to fail if you provide and empty or non-existent path (e.g. `xmlcheck ./src/main/res/layout --fail-on-empty`). Defaults to true.
+- `--fail-on-empty` or `--no-fail-on-empty` - Whether or not you want the checks to fail if you provide an empty or non-existent path (e.g. `xmlcheck ./src/main/res/layout --fail-on-empty`). Defaults to true.
 
 ## Rules
 
@@ -26,7 +26,7 @@ You must specifiy the path you wish to run the checks on:
 
 #### ClassMaterialButton
 
-Ensure that all buttons are `MaterialButton`'s rather than normal `Button`'s. This is imnportant if you are implementing a MaterialComponents theme.
+Ensure that all buttons are `MaterialButton`'s rather than normal `Button`'s. This is important if you are implementing a MaterialComponents theme.
 
 ### Attribute
 
@@ -42,7 +42,7 @@ Ensure that all buttons are `MaterialButton`'s rather than normal `Button`'s. Th
 
 `android:id` should adhere to naming conventions
 
-Generally you should start your id with the first word of the class name e.g. `image_something`
+Generally you should start your id with the first word of the class name e.g. `image_something`. There some specific exceptions though which can be found here: `src/main/kotlin/uk/co/brightec/xmlcheck/rules/attr/android/Id.kt`
 
 #### Margin2s
 
