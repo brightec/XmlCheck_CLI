@@ -321,6 +321,98 @@ private class EndToEndTest {
     }
 
     @Test
+    fun `Given Height2s failure | When run checker | Then fails with log`() {
+        // GIVEN
+        val path = "./src/test/resources/files/failures/Height2s"
+
+        // WHEN
+        val result = assertThrows<IllegalStateException> {
+            main(
+                arrayOf(
+                    path
+                )
+            )
+        }
+
+        // THEN
+        assertNotNull(result)
+        val outputErr = errContent.toString()
+        val expectedLog1 = """
+            ./src/test/resources/files/failures/Height2s/Height2s.xml
+            (Height2s) Line:3: android:layout_height="3dp" - Height not divisible by 2
+            """.trimIndent()
+        assertContains(expectedLog1, outputErr)
+    }
+
+    @Test
+    fun `Given Height2s success | When run checker | Then passes, no errors`() {
+        // GIVEN
+        val path = "./src/test/resources/files/success/Height2s"
+
+        // WHEN
+        main(
+            arrayOf(
+                path
+            )
+        )
+
+        // THEN
+        val outputOut = outContent.toString()
+        val expectedLog1 = """
+            Height2s.xml PASSED
+            """.trimIndent()
+        assertContains(expectedLog1, outputOut)
+        val outputErr = errContent.toString()
+        assertEquals("", outputErr)
+    }
+
+    @Test
+    fun `Given Width2s failure | When run checker | Then fails with log`() {
+        // GIVEN
+        val path = "./src/test/resources/files/failures/Width2s"
+
+        // WHEN
+        val result = assertThrows<IllegalStateException> {
+            main(
+                arrayOf(
+                    path
+                )
+            )
+        }
+
+        // THEN
+        assertNotNull(result)
+        val outputErr = errContent.toString()
+        val expectedLog1 = """
+            ./src/test/resources/files/failures/Width2s/Width2s.xml
+            (Width2s) Line:3: android:layout_width="3dp" - Width not divisible by 2
+            """.trimIndent()
+        assertContains(expectedLog1, outputErr)
+    }
+
+    @Test
+    fun `Given Width2s success | When run checker | Then passes, no errors`() {
+        // GIVEN
+        val path = "./src/test/resources/files/success/Width2s"
+
+        // WHEN
+        main(
+            arrayOf(
+                path
+            )
+        )
+
+        // THEN
+        val outputOut = outContent.toString()
+        val expectedLog1 = """
+            Width2s.xml PASSED
+            """.trimIndent()
+        assertContains(expectedLog1, outputOut)
+        val outputErr = errContent.toString()
+        assertEquals("", outputErr)
+    }
+
+    @Test
     fun `Given Margin2s failure | When run checker | Then fails with log`() {
         // GIVEN
         val path = "./src/test/resources/files/failures/Margin2s"

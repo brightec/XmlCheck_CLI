@@ -14,8 +14,10 @@ import uk.co.brightec.xmlcheck.extension.lineNumber
 import uk.co.brightec.xmlcheck.extension.systemId
 import uk.co.brightec.xmlcheck.rules.RuleName
 import uk.co.brightec.xmlcheck.rules.attr.AttrCheck
+import uk.co.brightec.xmlcheck.rules.attr.android.Height
 import uk.co.brightec.xmlcheck.rules.attr.android.Id
 import uk.co.brightec.xmlcheck.rules.attr.android.TextSize
+import uk.co.brightec.xmlcheck.rules.attr.android.Width
 import uk.co.brightec.xmlcheck.rules.attr.android.color.TextColor
 import uk.co.brightec.xmlcheck.rules.attr.android.color.Tint
 import uk.co.brightec.xmlcheck.rules.attr.android.constraint.*
@@ -58,7 +60,9 @@ internal class Checker : CliktCommand() {
     )
     private val allAttrChecks: List<AttrCheck> = arrayListOf(
         Id(),
-        TextSize()
+        TextSize(),
+        Height(),
+        Width()
     ).apply {
         addAll(colorAttrChecks)
         addAll(constraintAttrChecks)
