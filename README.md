@@ -22,14 +22,15 @@ This CLI tool is designed to help Android developers produce the best XML layout
     - [Margin2s](#margin2s)
     - [ConstraintIdPlus](#constraintidplus)
     - [ColorRes](#colorres)
+- [Suppression](#suppression)
 - [Customise](#customise)
   + [Types of rule](#types-of-rule)
   + [Adding a rule](#adding-a-rule)
-  + [Add the Check class](#add-the-check-class)
-  + [Implement the rule](#implement-the-rule)
-  + [Add the check to the checker](#add-the-check-to-the-checker)
-  + [Testing the rule](#testing-the-rule)
-  + [Running and building](#running-and-building)
+    - [Add the Check class](#1--add-the-check-class)
+    - [Implement the rule](#2--implement-the-rule)
+    - [Add the check to the checker](#3--add-the-check-to-the-checker)
+    - [Testing the rule](#4--testing-the-rule)
+    - [Running and building](#5--running-and-building)
 - [Acknowledgments](#acknowledgments)
 - [License](#license)
 - [Author](#author)
@@ -90,7 +91,11 @@ All references to id's should start with `@+id/`.
 
 #### ColorRes
 
-All colors should be specifed in resources rather than hex.
+All colors should be specified in resources rather than hex.
+
+## Suppression
+
+In addition to being able to exclude a rule, you can also suppress specific instances by adding `tools:ignore="Rule1,Rule2"`.
 
 ## Customise
 
@@ -104,9 +109,9 @@ We have two types of rules, attribute and element. Attribute rules define a rule
 
 Let's say we wanted to add an attribute rule for the `android:text` attribute. We want all our text to always contain `I Love XML`.
 
-#### Add the Check class
+#### 1. Add the Check class
 
-First, we will add the class for a new check on the `android:text` atribute since one doesn't exist yet (a check is a collection of rules). Then we will add our new rule to that check.
+First, we will add the class for a new check on the `android:text` attribute since one doesn't exist yet (a check is a collection of rules). Then we will add our new rule to that check.
 
 `src/main/kotlin/uk/co/brightec/xmlcheck/rules/attr/android/Text.kt`
 ```
@@ -148,7 +153,7 @@ We subclass `AttrCheck` and then override the required properties and methods.
 - `runCheck()` - This is where we will actually implement our rule logic
 - `RULE_TEXT_LOVE_XML` - This is an instance of the `Rule` class which helps to encapsulate some information about the rule.
 
-#### Implement the rule
+#### 2. Implement the rule
 
 To implement our rule we adjust the `runCheck()` implementation.
 
@@ -176,7 +181,7 @@ First we check whether our rule has been suppressed (rules can be suppressed whe
 
 `ruleTextLoveXml(): Boolean` - We like to move the logic for our rules out into separate methods, as sometimes they can get quite complex.
 
-#### Add the check to the checker
+#### 3. Add the check to the checker
 
 Within `uk.co.brightec.xmlcheck.Checker.kt`, we add our new attribute check to the `allAttrChecks` list.
 
@@ -189,13 +194,13 @@ private val allAttrChecks: List<AttrCheck> = arrayListOf(
 
 Now XMLCheck is aware of our check (and rule), and we can run XMLCheck and our new rule will be checked aginst.
 
-#### Testing the rule
+#### 4. Testing the rule
 
 We have two kinds of tests within the project. Unit and EndToEnd. Within Unit tests we mock an attribute and then assert various cases about our rule. Within EndToEnd, we run our checks against an XML file and verify the expected output (i.e. command line output).
 
 Checkout some of the tests we have already written for an example of how to tests for your new rules.
 
-#### Running and building
+#### 5. Running and building
 
 There are a few gradle tasks to aid with development and distribution
 - `installAndRun` - This installs the current state of the project and runs it against the XML files within `src/test/resources/files/cases/`
