@@ -6,7 +6,7 @@
     <data></data>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/card_station_details"
+        android:id="@+id/card_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -22,25 +22,25 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/text_title_journey_planner"
+                android:id="@+id/text_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:drawableStart="@drawable/ic_journey_planner_24dp"
+                android:drawableStart="@drawable/ic_planner_24dp"
                 android:drawablePadding="16dp"
                 android:gravity="center_vertical"
-                android:text="@string/title_journey_planner"
+                android:text="@string/title_planner"
                 android:textColor="@color/grey_dark"
                 android:textSize="16sp" />
 
             <ProgressBar
-                android:id="@+id/progress_stations"
+                android:id="@+id/progress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/text_title_journey_planner"
-                android:layout_alignBottom="@+id/text_title_journey_planner"
+                android:layout_alignTop="@+id/text_title"
+                android:layout_alignBottom="@+id/text_title"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="2dp"
@@ -52,7 +52,7 @@
                 android:id="@+id/textinput_from"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/text_title_journey_planner"
+                android:layout_below="@+id/text_title"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="16dp"
@@ -116,7 +116,7 @@
                 android:layout_marginTop="36dp"
                 android:layout_marginEnd="24dp"
                 android:layout_marginBottom="24dp"
-                android:text="@string/action_add_journey_times" />
+                android:text="@string/action_next" />
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
