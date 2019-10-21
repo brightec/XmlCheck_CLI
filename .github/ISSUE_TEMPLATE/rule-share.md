@@ -1,7 +1,7 @@
 ---
 name: Rule Share
 about: Why not share your new rule with us and the community
-title: "[RULE] "
+title: "[RULE] {RuleName}"
 labels: rule
 assignees: ''
 
