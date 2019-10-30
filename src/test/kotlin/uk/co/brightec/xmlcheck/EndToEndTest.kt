@@ -88,11 +88,38 @@ private class EndToEndTest {
         assertContains(expectedLog1, outputOut)
         val expectedLog2 = """
             ./src/test/resources/files/cases/case2/case2.xml
-            (IdNaming) Line:62: android:id="@+id/textinput_from" - Id for com.trainsplit.trainsplit.widgets.TextInputWidget doesn't conform to naming convention
-            (IdNaming) Line:91: android:id="@+id/textinput_to" - Id for com.trainsplit.trainsplit.widgets.TextInputWidget doesn't conform to naming convention
+            (IdNaming) Line:62: android:id="@+id/textinput_from" - Id for TextInputWidget doesn't conform to naming convention
+            (IdNaming) Line:91: android:id="@+id/textinput_to" - Id for TextInputWidget doesn't conform to naming convention
             (ClassMaterialButton) Line:119: Button - Should use MaterialButton
             """.trimIndent()
         assertContains(expectedLog2, outputErr)
+    }
+
+    @Test
+    fun `Given TextSizeUnit failure | When run checker with suppressed | Then passes, no errors`() {
+        // GIVEN
+        val path = "./src/test/resources/files/failures/TextSizeUnit"
+
+        // WHEN
+        main(
+            arrayOf(
+                path,
+                "--exclude", "TextSizeUnit"
+            )
+        )
+
+        // THEN
+        val outputOut = outContent.toString()
+        val expectedLog1 = """
+            TextSizeUnit-dp.xml PASSED
+            """.trimIndent()
+        assertContains(expectedLog1, outputOut)
+        val expectedLog2 = """
+            TextSizeUnit-px.xml PASSED
+            """.trimIndent()
+        assertContains(expectedLog2, outputOut)
+        val outputErr = errContent.toString()
+        assertEquals("", outputErr)
     }
 
     @Test
@@ -147,6 +174,29 @@ private class EndToEndTest {
     }
 
     @Test
+    fun `Given ClassMaterialButton failure | When run checker with suppressed | Then passes, no errors`() {
+        // GIVEN
+        val path = "./src/test/resources/files/failures/ClassMaterialButton"
+
+        // WHEN
+        main(
+            arrayOf(
+                path,
+                "--exclude", "ClassMaterialButton"
+            )
+        )
+
+        // THEN
+        val outputOut = outContent.toString()
+        val expectedLog = """
+            ClassMaterialButton.xml PASSED
+            """.trimIndent()
+        assertContains(expectedLog, outputOut)
+        val outputErr = errContent.toString()
+        assertEquals("", outputErr)
+    }
+
+    @Test
     fun `Given ClassMaterialButton failure | When run checker | Then fails with log`() {
         // GIVEN
         val path = "./src/test/resources/files/failures/ClassMaterialButton"
@@ -186,6 +236,29 @@ private class EndToEndTest {
         val outputOut = outContent.toString()
         val expectedLog = """
             ClassMaterialButton.xml PASSED
+            """.trimIndent()
+        assertContains(expectedLog, outputOut)
+        val outputErr = errContent.toString()
+        assertEquals("", outputErr)
+    }
+
+    @Test
+    fun `Given IdPlus failure | When run checker with suppressed | Then passes, no errors`() {
+        // GIVEN
+        val path = "./src/test/resources/files/failures/IdPlus"
+
+        // WHEN
+        main(
+            arrayOf(
+                path,
+                "--exclude", "IdPlus"
+            )
+        )
+
+        // THEN
+        val outputOut = outContent.toString()
+        val expectedLog = """
+            IdPlus.xml PASSED
             """.trimIndent()
         assertContains(expectedLog, outputOut)
         val outputErr = errContent.toString()
@@ -234,6 +307,45 @@ private class EndToEndTest {
             IdPlus.xml PASSED
             """.trimIndent()
         assertContains(expectedLog, outputOut)
+        val outputErr = errContent.toString()
+        assertEquals("", outputErr)
+    }
+
+    @Test
+    fun `Given IdNaming failure | When run checker with suppressed | Then passes, no errors`() {
+        // GIVEN
+        val path = "./src/test/resources/files/failures/IdNaming"
+
+        // WHEN
+        main(
+            arrayOf(
+                path,
+                "--exclude", "IdNaming"
+            )
+        )
+
+        // THEN
+        val outputOut = outContent.toString()
+        val expectedLog1 = """
+            IdNaming-Buttons.xml PASSED
+            """.trimIndent()
+        assertContains(expectedLog1, outputOut)
+        val expectedLog2 = """
+            IdNaming-GifImageView.xml PASSED
+            """.trimIndent()
+        assertContains(expectedLog2, outputOut)
+        val expectedLog3 = """
+            IdNaming-Guideline.xml PASSED
+            """.trimIndent()
+        assertContains(expectedLog3, outputOut)
+        val expectedLog4 = """
+            IdNaming-HorizontalScrollView.xml PASSED
+            """.trimIndent()
+        assertContains(expectedLog4, outputOut)
+        val expectedLog5 = """
+            IdNaming-Words.xml PASSED
+            """.trimIndent()
+        assertContains(expectedLog5, outputOut)
         val outputErr = errContent.toString()
         assertEquals("", outputErr)
     }
@@ -321,6 +433,29 @@ private class EndToEndTest {
     }
 
     @Test
+    fun `Given Height2s failure | When run checker with suppressed | Then passes, no errors`() {
+        // GIVEN
+        val path = "./src/test/resources/files/failures/Height2s"
+
+        // WHEN
+        main(
+            arrayOf(
+                path,
+                "--exclude", "Height2s"
+            )
+        )
+
+        // THEN
+        val outputOut = outContent.toString()
+        val expectedLog = """
+            Height2s.xml PASSED
+            """.trimIndent()
+        assertContains(expectedLog, outputOut)
+        val outputErr = errContent.toString()
+        assertEquals("", outputErr)
+    }
+
+    @Test
     fun `Given Height2s failure | When run checker | Then fails with log`() {
         // GIVEN
         val path = "./src/test/resources/files/failures/Height2s"
@@ -367,6 +502,29 @@ private class EndToEndTest {
     }
 
     @Test
+    fun `Given Width2s failure | When run checker with suppressed | Then passes, no errors`() {
+        // GIVEN
+        val path = "./src/test/resources/files/failures/Width2s"
+
+        // WHEN
+        main(
+            arrayOf(
+                path,
+                "--exclude", "Width2s"
+            )
+        )
+
+        // THEN
+        val outputOut = outContent.toString()
+        val expectedLog = """
+            Width2s.xml PASSED
+            """.trimIndent()
+        assertContains(expectedLog, outputOut)
+        val outputErr = errContent.toString()
+        assertEquals("", outputErr)
+    }
+
+    @Test
     fun `Given Width2s failure | When run checker | Then fails with log`() {
         // GIVEN
         val path = "./src/test/resources/files/failures/Width2s"
@@ -408,6 +566,41 @@ private class EndToEndTest {
             Width2s.xml PASSED
             """.trimIndent()
         assertContains(expectedLog1, outputOut)
+        val outputErr = errContent.toString()
+        assertEquals("", outputErr)
+    }
+
+    @Test
+    fun `Given Margin2s failure | When run checker with suppressed | Then passes, no errors`() {
+        // GIVEN
+        val path = "./src/test/resources/files/failures/Margin2s"
+
+        // WHEN
+        main(
+            arrayOf(
+                path,
+                "--exclude", "Margin2s"
+            )
+        )
+
+        // THEN
+        val outputOut = outContent.toString()
+        val expectedLog1 = """
+            Margin2s-LayoutMarginBottom.xml PASSED
+            """.trimIndent()
+        assertContains(expectedLog1, outputOut)
+        val expectedLog2 = """
+            Margin2s-LayoutMarginEnd.xml PASSED
+            """.trimIndent()
+        assertContains(expectedLog2, outputOut)
+        val expectedLog3 = """
+            Margin2s-LayoutMarginStart.xml PASSED
+            """.trimIndent()
+        assertContains(expectedLog3, outputOut)
+        val expectedLog4 = """
+            Margin2s-LayoutMarginTop.xml PASSED
+            """.trimIndent()
+        assertContains(expectedLog4, outputOut)
         val outputErr = errContent.toString()
         assertEquals("", outputErr)
     }
@@ -481,6 +674,57 @@ private class EndToEndTest {
             Margin2s-LayoutMarginTop.xml PASSED
             """.trimIndent()
         assertContains(expectedLog4, outputOut)
+        val outputErr = errContent.toString()
+        assertEquals("", outputErr)
+    }
+
+    @Test
+    fun `Given ConstraintIdPlus failure | When run checker with suppressed | Then passes, no errors`() {
+        // GIVEN
+        val path = "./src/test/resources/files/failures/ConstraintIdPlus"
+
+        // WHEN
+        main(
+            arrayOf(
+                path,
+                "--exclude", "ConstraintIdPlus"
+            )
+        )
+
+        // THEN
+        val outputOut = outContent.toString()
+        val expectedLog1 = """
+            ConstraintIdPlus-LayoutConstraintBottomToBottomOf.xml PASSED
+            """.trimIndent()
+        assertContains(expectedLog1, outputOut)
+        val expectedLog2 = """
+            ConstraintIdPlus-LayoutConstraintBottomToTopOf.xml PASSED
+            """.trimIndent()
+        assertContains(expectedLog2, outputOut)
+        val expectedLog3 = """
+            ConstraintIdPlus-LayoutConstraintEndToEndOf.xml PASSED
+            """.trimIndent()
+        assertContains(expectedLog3, outputOut)
+        val expectedLog4 = """
+            ConstraintIdPlus-LayoutConstraintEndToStartOf.xml PASSED
+            """.trimIndent()
+        assertContains(expectedLog4, outputOut)
+        val expectedLog5 = """
+            ConstraintIdPlus-LayoutConstraintStartToEndOf.xml PASSED
+            """.trimIndent()
+        assertContains(expectedLog5, outputOut)
+        val expectedLog6 = """
+            ConstraintIdPlus-LayoutConstraintStartToStartOf.xml PASSED
+            """.trimIndent()
+        assertContains(expectedLog6, outputOut)
+        val expectedLog7 = """
+            ConstraintIdPlus-LayoutConstraintTopToBottomOf.xml PASSED
+            """.trimIndent()
+        assertContains(expectedLog7, outputOut)
+        val expectedLog8 = """
+            ConstraintIdPlus-LayoutConstraintTopToTopOf.xml PASSED
+            """.trimIndent()
+        assertContains(expectedLog8, outputOut)
         val outputErr = errContent.toString()
         assertEquals("", outputErr)
     }
@@ -590,6 +834,33 @@ private class EndToEndTest {
             ConstraintIdPlus-LayoutConstraintTopToTopOf.xml PASSED
             """.trimIndent()
         assertContains(expectedLog8, outputOut)
+        val outputErr = errContent.toString()
+        assertEquals("", outputErr)
+    }
+
+    @Test
+    fun `Given ColorRes failure | When run checker with suppressed | Then passes, no errors`() {
+        // GIVEN
+        val path = "./src/test/resources/files/failures/ColorRes"
+
+        // WHEN
+        main(
+            arrayOf(
+                path,
+                "--exclude", "ColorRes"
+            )
+        )
+
+        // THEN
+        val outputOut = outContent.toString()
+        val expectedLog1 = """
+            ColorRes-TextColor.xml PASSED
+            """.trimIndent()
+        assertContains(expectedLog1, outputOut)
+        val expectedLog2 = """
+            ColorRes-Tint.xml PASSED
+            """.trimIndent()
+        assertContains(expectedLog2, outputOut)
         val outputErr = errContent.toString()
         assertEquals("", outputErr)
     }
