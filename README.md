@@ -4,7 +4,7 @@
 
 # XmlCheck_CLI
 
-This CLI tool is designed to help Android developers produce the best XML layouts they can. This tool runs a variety of checks against the given files to ensure certain styles are adhered to. These checks are styles we adhere to within our team. Yours may (and probably will) be different, so why not fork this project and add your own. Our intention is not to impose a style guide, but to offer a tool to help you stick to yours.
+This CLI tool is designed to help Android developers produce the best XML layouts they can. This tool runs a variety of rules against the given files to ensure certain styles are adhered to. These rules are styles we adhere to within our team. Yours may (and probably will) be different, so why not fork this project and add your own. Our intention is not to impose a style guide, but to offer a tool to help you stick to yours.
 
 ## Table of Contents
 
@@ -26,9 +26,9 @@ This CLI tool is designed to help Android developers produce the best XML layout
 - [Customise](#customise)
   + [Types of rule](#types-of-rule)
   + [Adding a rule](#adding-a-rule)
-    - [1. Add the Check class](#1-add-the-check-class)
+    - [1. Add the Rule class](#1-add-the-rule-class)
     - [2. Implement the rule](#2-implement-the-rule)
-    - [3. Add the check to the checker](#3-add-the-rule-to-the-checker)
+    - [3. Add the rule to the checker](#3-add-the-rule-to-the-checker)
     - [4. Testing the rule](#4-testing-the-rule)
     - [5. Running and building](#5-running-and-building)
 - [Acknowledgments](#acknowledgments)
@@ -39,7 +39,7 @@ This CLI tool is designed to help Android developers produce the best XML layout
 
 Add the jar to your project found on the releases page.
 
-You must specify the path you wish to run the checks on:
+You must specify the path you wish to run the rules on:
 
 `xmlcheck ./src/main/res/layout`
 
@@ -109,7 +109,7 @@ We have two types of rules, attribute and element. Attribute rules define a rule
 
 Let's say we wanted to add an attribute rule for the `android:text` attribute. We want all our text to always contain `I Love XML`.
 
-#### 1. Add the Check class
+#### 1. Add the Rule class
 
 First, we will add the class for a new `AttrRule` for the `android:text` attribute.
 
@@ -169,7 +169,7 @@ Now XMLCheck is aware of our rule, and we can run XMLCheck and our new rule will
 
 #### 4. Testing the rule
 
-We have two kinds of tests within the project. Unit and EndToEnd. Within Unit tests we mock an attribute and then assert various cases about our rule. Within EndToEnd, we run our checks against an XML file and verify the expected output (i.e. command line output).
+We have two kinds of tests within the project. Unit and EndToEnd. Within Unit tests we mock an attribute and then assert various cases about our rule. Within EndToEnd, we run our rules against an XML file and verify the expected output (i.e. command line output).
 
 Checkout some of the tests we have already written for an example of how to tests for your new rules.
 
