@@ -28,7 +28,7 @@ This CLI tool is designed to help Android developers produce the best XML layout
   + [Adding a rule](#adding-a-rule)
     - [1. Add the Check class](#1-add-the-check-class)
     - [2. Implement the rule](#2-implement-the-rule)
-    - [3. Add the check to the checker](#3-add-the-check-to-the-checker)
+    - [3. Add the check to the checker](#3-add-the-rule-to-the-checker)
     - [4. Testing the rule](#4-testing-the-rule)
     - [5. Running and building](#5-running-and-building)
 - [Acknowledgments](#acknowledgments)
@@ -111,88 +111,61 @@ Let's say we wanted to add an attribute rule for the `android:text` attribute. W
 
 #### 1. Add the Check class
 
-First, we will add the class for a new check on the `android:text` attribute since one doesn't exist yet (a check is a collection of rules). Then we will add our new rule to that check.
+First, we will add the class for a new `AttrRule` for the `android:text` attribute.
 
-`src/main/kotlin/uk/co/brightec/xmlcheck/rules/attr/android/Text.kt`
+`src/main/kotlin/uk/co/brightec/xmlcheck/rules/attr/android/TextLoveXml.kt`
 ```
 package uk.co.brightec.xmlcheck.rules.attr.android
 
 import org.w3c.dom.Attr
 import uk.co.brightec.xmlcheck.Constants.ATTR_NAMESPACE_ANDROID
 import uk.co.brightec.xmlcheck.Failure
-import uk.co.brightec.xmlcheck.rules.Rule
-import uk.co.brightec.xmlcheck.rules.RuleName
-import uk.co.brightec.xmlcheck.rules.attr.AttrCheck
+import uk.co.brightec.xmlcheck.rules.attr.AttrRule
 
-class Text : AttrCheck() {
+class TextLoveXml : AttrRule(
+    name = "TextLoveXml",
+    attrName = "$ATTR_NAMESPACE_ANDROID:text"
+) {
 
-    override val rules: List<Rule>
-        get() = listOf(
-            RULE_TEXT_LOVE_XML
-        )
-    override val attrName: String
-        get() = "$ATTR_NAMESPACE_ANDROID:text"
-
-    override fun runCheck(node: Attr, suppressions: Collection<RuleName>): Failure<Attr>? {
-        return null
-    }
-
-    companion object {
-
-        val RULE_TEXT_LOVE_XML = Rule(
-            name = "TextLoveXml",
-            errorMessage = "All text must contain 'I Love XML'"
-        )
+    override fun run(node: Attr): Failure<Attr>? {
+        // ...
     }
 }
 ```
 
-We subclass `AttrCheck` and then override the required properties and methods.
-- `rules` - This is the list of rules within this check class i.e. `listOf(RULE_TEXT_LOVE_XML)`
-- `attrName` - The attribute this check affects i.e. `android:text`
-- `runCheck()` - This is where we will actually implement our rule logic
-- `RULE_TEXT_LOVE_XML` - This is an instance of the `Rule` class which helps to encapsulate some information about the rule.
+We subclass `AttrRule` and then override the required methods.
+- `name` - The name of your rule
+- `attrName` or `attrNames` - The attribute(s) this rule should apply to i.e. `android:text`
+- `run()` - This is where we will actually implement our rule logic
 
 #### 2. Implement the rule
 
-To implement our rule we adjust the `runCheck()` implementation.
+To implement our rule we adjust the `run()` implementation.
 
 ```
-class Text : AttrCheck() {
-
-    // ...
-
-    override fun runCheck(node: Attr, suppressions: Collection<RuleName>): Failure<Attr>? {
-        if (!suppressions.contains(RULE_TEXT_LOVE_XML.name) && ruleTextLoveXml(node)) {
-            return RULE_TEXT_LOVE_XML.failure(node)
-        }
-
-        return null
+override fun run(node: Attr): Failure<Attr>? {
+    return if (node.value.contains("I Love XML")) {
+        null
+    } else {
+        failure(node, "All text should love XML")
     }
-
-    private fun ruleTextLoveXml(attr: Attr) =
-        !attr.value.contains("I Love XML")
-
-    // ...
 }
 ```
 
-First we check whether our rule has been suppressed (rules can be suppressed when running XMLCheck), and then whether this attribute has violated the rule. If it has, we need to return a `Failure`.
+We need to check whether this attribute has violated the rule. If it has, we need to return a `Failure`, if not then return `null`.
 
-`ruleTextLoveXml(): Boolean` - We like to move the logic for our rules out into separate methods, as sometimes they can get quite complex.
+#### 3. Add the rule to the checker
 
-#### 3. Add the check to the checker
-
-Within `uk.co.brightec.xmlcheck.Checker.kt`, we add our new attribute check to the `allAttrChecks` list.
+Within `uk.co.brightec.xmlcheck.Checker.kt`, we add our new attribute rule to the `allAttrRules` list.
 
 ```
-private val allAttrChecks: List<AttrCheck> = arrayListOf(
+private val allAttrRules: List<AttrRule> = arrayListOf(
     // ...
-    Text()
+    TextLoveXml()
 )
 ```
 
-Now XMLCheck is aware of our check (and rule), and we can run XMLCheck and our new rule will be checked aginst.
+Now XMLCheck is aware of our rule, and we can run XMLCheck and our new rule will be checked against.
 
 #### 4. Testing the rule
 
