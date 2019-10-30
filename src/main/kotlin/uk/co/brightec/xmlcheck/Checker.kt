@@ -8,25 +8,26 @@ import com.github.ajalt.clikt.parameters.options.flag
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.split
 import com.github.ajalt.clikt.parameters.types.file
-import org.w3c.dom.*
+import org.w3c.dom.Attr
+import org.w3c.dom.Document
+import org.w3c.dom.Element
+import org.w3c.dom.Node
+import org.w3c.dom.NodeList
 import uk.co.brightec.xmlcheck.Constants.ATTR_NAMESPACE_TOOLS
 import uk.co.brightec.xmlcheck.extension.lineNumber
 import uk.co.brightec.xmlcheck.extension.systemId
 import uk.co.brightec.xmlcheck.rules.RuleName
-import uk.co.brightec.xmlcheck.rules.attr.AttrCheck
-import uk.co.brightec.xmlcheck.rules.attr.android.Height
-import uk.co.brightec.xmlcheck.rules.attr.android.Id
-import uk.co.brightec.xmlcheck.rules.attr.android.TextSize
-import uk.co.brightec.xmlcheck.rules.attr.android.Width
-import uk.co.brightec.xmlcheck.rules.attr.android.color.TextColor
-import uk.co.brightec.xmlcheck.rules.attr.android.color.Tint
-import uk.co.brightec.xmlcheck.rules.attr.android.constraint.*
-import uk.co.brightec.xmlcheck.rules.attr.android.margin.LayoutMarginBottom
-import uk.co.brightec.xmlcheck.rules.attr.android.margin.LayoutMarginEnd
-import uk.co.brightec.xmlcheck.rules.attr.android.margin.LayoutMarginStart
-import uk.co.brightec.xmlcheck.rules.attr.android.margin.LayoutMarginTop
-import uk.co.brightec.xmlcheck.rules.element.ElementCheck
-import uk.co.brightec.xmlcheck.rules.element.android.ClassName
+import uk.co.brightec.xmlcheck.rules.attr.AttrRule
+import uk.co.brightec.xmlcheck.rules.attr.android.ColorRes
+import uk.co.brightec.xmlcheck.rules.attr.android.ConstraintIdPlus
+import uk.co.brightec.xmlcheck.rules.attr.android.Height2s
+import uk.co.brightec.xmlcheck.rules.attr.android.IdNaming
+import uk.co.brightec.xmlcheck.rules.attr.android.IdPlus
+import uk.co.brightec.xmlcheck.rules.attr.android.Margin2s
+import uk.co.brightec.xmlcheck.rules.attr.android.TextSizeUnit
+import uk.co.brightec.xmlcheck.rules.attr.android.Width2s
+import uk.co.brightec.xmlcheck.rules.element.ElementRule
+import uk.co.brightec.xmlcheck.rules.element.android.ClassMaterialButton
 import java.io.File
 
 internal class Checker : CliktCommand() {
@@ -45,32 +46,18 @@ internal class Checker : CliktCommand() {
                 "(e.g. `xmlcheck ./src/main/res/layout --fail-on-empty`)"
     ).flag("--no-fail-on-empty", default = true)
 
-    private val colorAttrChecks: List<AttrCheck> = listOf(
-        TextColor(), Tint()
+    private val allElementRules: List<ElementRule> = listOf(
+        ClassMaterialButton()
     )
-    private val constraintAttrChecks: List<AttrCheck> = listOf(
-        LayoutConstraintStartToStartOf(), LayoutConstraintStartToEndOf(),
-        LayoutConstraintEndToStartOf(), LayoutConstraintEndToEndOf(),
-        LayoutConstraintTopToTopOf(), LayoutConstraintTopToBottomOf(),
-
-        LayoutConstraintBottomToTopOf(), LayoutConstraintBottomToBottomOf()
-    )
-    private val marginAttrChecks: List<AttrCheck> = listOf(
-        LayoutMarginStart(), LayoutMarginEnd(), LayoutMarginTop(), LayoutMarginBottom()
-    )
-    private val allAttrChecks: List<AttrCheck> = arrayListOf(
-        Id(),
-        TextSize(),
-        Height(),
-        Width()
-    ).apply {
-        addAll(colorAttrChecks)
-        addAll(constraintAttrChecks)
-        addAll(marginAttrChecks)
-    }
-
-    private val allElementChecks: List<ElementCheck> = listOf(
-        ClassName()
+    private val allAttrRules: List<AttrRule> = arrayListOf(
+        IdPlus(),
+        IdNaming(),
+        Height2s(),
+        TextSizeUnit(),
+        Width2s(),
+        Margin2s(),
+        ConstraintIdPlus(),
+        ColorRes()
     )
 
     override fun run() {
@@ -192,17 +179,23 @@ internal class Checker : CliktCommand() {
 
         val suppressions = determineSuppressions(element).union(excludes)
 
-        allElementChecks.forEach { elementCheck ->
-            elementCheck.check(element, suppressions)?.let {
-                failures.add(it)
+        allElementRules.forEach { rule ->
+            if (!suppressions.contains(rule.name)) {
+                rule.runChecked(element)?.let {
+                    failures.add(it)
+                }
             }
         }
 
-        allAttrChecks.forEach { attrCheck ->
-            element.attributes?.getNamedItem(attrCheck.attrName)?.let { node ->
-                check(node is Attr)
-                attrCheck.check(node, suppressions)?.let {
-                    failures.add(it)
+        allAttrRules.forEach { rule ->
+            rule.attrNames.forEach { attrName ->
+                element.attributes?.getNamedItem(attrName)?.let { node ->
+                    check(node is Attr)
+                    if (!suppressions.contains(rule.name)) {
+                        rule.runChecked(node)?.let {
+                            failures.add(it)
+                        }
+                    }
                 }
             }
         }

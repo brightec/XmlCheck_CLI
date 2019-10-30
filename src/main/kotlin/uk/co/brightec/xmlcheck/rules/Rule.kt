@@ -3,14 +3,15 @@ package uk.co.brightec.xmlcheck.rules
 import org.w3c.dom.Node
 import uk.co.brightec.xmlcheck.Failure
 
-data class Rule(
-    val name: RuleName,
-    val errorMessage: String
+abstract class Rule<T : Node>(
+    val name: RuleName
 ) {
 
-    fun <T : Node> failure(
+    abstract fun run(node: T): Failure<T>?
+
+    fun failure(
         node: T,
-        errorMessage: String = this.errorMessage
+        errorMessage: String
     ) = Failure(
         ruleName = name,
         node = node,
