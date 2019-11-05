@@ -50,16 +50,13 @@ class IdNaming : AttrRule(
         if (className == "RadioButton") {
             return attrId == "radio" || attrId.startsWith("radio_")
         }
+        if (className.contains("CheckBox")) {
+            return attrId == "check_box" || attrId.startsWith("check_box_")
+        }
 
         // General rules
         if (words.contains("Button")) {
             return attrId == "button" || attrId.startsWith("button_")
-        }
-        if (words.contains("CheckBox")) {
-            return attrId == "check_box" || attrId.startsWith("check_box_")
-        }
-        if (words.contains("Switch")) {
-            return attrId == "switch" || attrId.startsWith("switch_")
         }
         if (words.contains("Card")) {
             return attrId == "card" || attrId.startsWith("card_")

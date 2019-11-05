@@ -423,6 +423,91 @@ private class IdNamingTest {
     }
 
     @ParameterizedTest
+    @MethodSource("createArgumentsCheckBox")
+    fun `Given tagName CheckBox and naming failure | When run check | Then failure`(
+        tagName: String,
+        parentTagName: String?
+    ) {
+        // GIVEN
+        val parentTagAttr = mockk<Attr> {
+            every { value } returns parentTagName
+        }
+        val owner = mockk<Element> {
+            every { this@mockk.tagName } returns tagName
+            every {
+                attributes.getNamedItem("$ATTR_NAMESPACE_TOOLS:parentTag")
+            } returns parentTagAttr
+        }
+        val node = mockk<Attr> {
+            every { value } returns "@+id/other"
+            every { ownerElement } returns owner
+        }
+
+        // WHEN
+        val result = rule.run(node)
+
+        // THEN
+        val expected = rule.failure(node, "Id for ${owner.tagName} doesn't conform to naming convention")
+        assertEquals(expected, result)
+    }
+
+    @ParameterizedTest
+    @MethodSource("createArgumentsCheckBox")
+    fun `Given tagName CheckBox and naming exact correct | When run check | Then no failure`(
+        tagName: String,
+        parentTagName: String?
+    ) {
+        // GIVEN
+        val parentTagAttr = mockk<Attr> {
+            every { value } returns parentTagName
+        }
+        val owner = mockk<Element> {
+            every { this@mockk.tagName } returns tagName
+            every {
+                attributes.getNamedItem("$ATTR_NAMESPACE_TOOLS:parentTag")
+            } returns parentTagAttr
+        }
+        val node = mockk<Attr> {
+            every { value } returns "@+id/check_box"
+            every { ownerElement } returns owner
+        }
+
+        // WHEN
+        val result = rule.run(node)
+
+        // THEN
+        assertNull(result)
+    }
+
+    @ParameterizedTest
+    @MethodSource("createArgumentsCheckBox")
+    fun `Given tagName CheckBox and naming correct | When run check | Then no failure`(
+        tagName: String,
+        parentTagName: String?
+    ) {
+        // GIVEN
+        val parentTagAttr = mockk<Attr> {
+            every { value } returns parentTagName
+        }
+        val owner = mockk<Element> {
+            every { this@mockk.tagName } returns tagName
+            every {
+                attributes.getNamedItem("$ATTR_NAMESPACE_TOOLS:parentTag")
+            } returns parentTagAttr
+        }
+        val node = mockk<Attr> {
+            every { value } returns "@+id/check_box_anything"
+            every { ownerElement } returns owner
+        }
+
+        // WHEN
+        val result = rule.run(node)
+
+        // THEN
+        assertNull(result)
+    }
+
+    @ParameterizedTest
     @MethodSource("createArgumentsSomeButton")
     fun `Given tagName SomeButton and naming failure | When run check | Then failure`(
         tagName: String,
@@ -638,6 +723,9 @@ private class IdNamingTest {
 
         @JvmStatic
         fun createArgumentsGuideline() = createArguments("Guideline")
+
+        @JvmStatic
+        fun createArgumentsCheckBox() = createArguments("CheckBox")
 
         @JvmStatic
         fun createArgumentsSomeButton() = createArguments("SomeButton")
