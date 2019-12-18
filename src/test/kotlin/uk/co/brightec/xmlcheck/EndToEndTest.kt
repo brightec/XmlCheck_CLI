@@ -354,6 +354,10 @@ private class EndToEndTest {
             IdNaming-ViewStub.xml PASSED
             """.trimIndent()
         assertContains(expectedLog7, outputOut)
+        val expectedLog8 = """
+            IdNaming-NestedScrollView.xml PASSED
+            """.trimIndent()
+        assertContains(expectedLog8, outputOut)
         val outputErr = errContent.toString()
         assertEquals("", outputErr)
     }
@@ -410,6 +414,11 @@ private class EndToEndTest {
             (IdNaming) Line:3: android:id="@+id/something" - Id for ViewStub doesn't conform to naming convention
             """.trimIndent()
         assertContains(expectedLog7, outputErr)
+        val expectedLog8 = """
+            ./src/test/resources/files/failures/IdNaming/IdNaming-NestedScrollView.xml
+            (IdNaming) Line:3: android:id="@+id/something" - Id for NestedScrollView doesn't conform to naming convention
+            """.trimIndent()
+        assertContains(expectedLog8, outputErr)
     }
 
     @Test
@@ -456,6 +465,10 @@ private class EndToEndTest {
         assertContains(expectedLog7, outputOut)
         val outputErr = errContent.toString()
         assertEquals("", outputErr)
+        val expectedLog8 = """
+            IdNaming-NestedScrollView.xml PASSED
+            """.trimIndent()
+        assertContains(expectedLog8, outputOut)
     }
 
     @Test

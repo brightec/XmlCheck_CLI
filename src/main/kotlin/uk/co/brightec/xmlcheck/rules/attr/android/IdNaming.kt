@@ -41,6 +41,9 @@ class IdNaming : AttrRule(
         if (className == "HorizontalScrollView") {
             return attrId == "scroll" || attrId.startsWith("scroll_")
         }
+        if (className == "NestedScrollView") {
+            return attrId == "scroll" || attrId.startsWith("scroll_")
+        }
         if (className == "GifImageView") {
             return attrId == "image" || attrId.startsWith("image_")
         }
