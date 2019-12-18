@@ -350,6 +350,10 @@ private class EndToEndTest {
             IdNaming-CheckBox.xml PASSED
             """.trimIndent()
         assertContains(expectedLog6, outputOut)
+        val expectedLog7 = """
+            IdNaming-ViewStub.xml PASSED
+            """.trimIndent()
+        assertContains(expectedLog7, outputOut)
         val outputErr = errContent.toString()
         assertEquals("", outputErr)
     }
@@ -401,6 +405,11 @@ private class EndToEndTest {
             (IdNaming) Line:3: android:id="@+id/something" - Id for CheckBox doesn't conform to naming convention
             """.trimIndent()
         assertContains(expectedLog6, outputErr)
+        val expectedLog7 = """
+            ./src/test/resources/files/failures/IdNaming/IdNaming-ViewStub.xml
+            (IdNaming) Line:3: android:id="@+id/something" - Id for ViewStub doesn't conform to naming convention
+            """.trimIndent()
+        assertContains(expectedLog7, outputErr)
     }
 
     @Test
@@ -441,6 +450,10 @@ private class EndToEndTest {
             IdNaming-CheckBox.xml PASSED
             """.trimIndent()
         assertContains(expectedLog6, outputOut)
+        val expectedLog7 = """
+            IdNaming-ViewStub.xml PASSED
+            """.trimIndent()
+        assertContains(expectedLog7, outputOut)
         val outputErr = errContent.toString()
         assertEquals("", outputErr)
     }

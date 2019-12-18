@@ -53,6 +53,9 @@ class IdNaming : AttrRule(
         if (className.contains("CheckBox")) {
             return attrId == "check_box" || attrId.startsWith("check_box_")
         }
+        if (className.contains("ViewStub")) {
+            return attrId == "stub" || attrId.startsWith("stub_")
+        }
 
         // General rules
         if (words.contains("Button")) {
